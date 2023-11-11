@@ -1,13 +1,11 @@
 package org.gift.randomizer.app.model;
 
-import lombok.Value;
-import org.gift.randomizer.app.model.GiftIdea;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-import java.util.List;
-
-@Value
+@AllArgsConstructor
+@Getter
 public class Person {
-    Long id;
-    String name;
-    List<GiftIdea> giftIdeas;
+    private final Long id;
+    private final String name;
 }
