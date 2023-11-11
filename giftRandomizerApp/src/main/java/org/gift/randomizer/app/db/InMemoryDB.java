@@ -49,6 +49,12 @@ public class InMemoryDB {
     }
 
     public Response removePersonById(Long id) {
-        return new Response("not implemented", "501");
+        try {
+            val foundPerson = getPersonById(id);
+            persons.remove(foundPerson);
+            return new Response("candidate with id: %s removed".formatted(id), "200");
+        } catch (NoCandidateException e) {
+            return new Response("cannot remove, candidate with id: %s not found".formatted(id), "204");
+        }
     }
 }
