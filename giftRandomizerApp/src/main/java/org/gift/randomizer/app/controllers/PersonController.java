@@ -151,7 +151,6 @@ public class PersonController {
         }
     }
 
-
     private LinkedMultiValueMap<String, String> createHeaders(String contentType) {
         val responseHeaders = new LinkedMultiValueMap<String, String>();
         responseHeaders.add("Content-Type", contentType);
