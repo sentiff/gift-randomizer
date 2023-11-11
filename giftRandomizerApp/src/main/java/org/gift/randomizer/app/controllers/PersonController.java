@@ -17,7 +17,7 @@ import java.util.List;
 public class PersonController {
 
     private final String APPLICATION_JSON = "application/json";
-    private final String TEXT_PLAIN = "text_plain";
+    private final String TEXT_PLAIN = "text/plain";
 
     @Autowired
     private JsonUtils jsonUtils;
