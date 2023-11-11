@@ -44,8 +44,42 @@ public class InMemoryDB {
         return new Response("added with id: %s".formatted(nextAvailableId), "200");
     }
 
-    public Response updatePersonById(Long id) {
-        return new Response("not implemented", "501");
+    public Response updatePersonById(Long id, String name) {
+        try {
+            val foundPerson = getPersonById(id);
+            removePersonById(id);
+            val updatedPerson = new Person(foundPerson.getId(), name, foundPerson.getGiftIdeas());
+            persons.add(updatedPerson);
+            return new Response("updated candidate with id: %s".formatted(id), "200");
+        } catch (NoCandidateException e) {
+            return new Response("cannot remove, candidate with id: %s not found".formatted(id), "204");
+        }
+    }
+
+    public Response updatePersonById(Long id, List<String> rawGiftIdeas) {
+        try {
+            val foundPerson = getPersonById(id);
+            removePersonById(id);
+            val mappedGiftIdeas = rawGiftIdeas.stream().map(GiftIdea::new).toList();
+            val updatedPerson = new Person(foundPerson.getId(), foundPerson.getName(), mappedGiftIdeas);
+            persons.add(updatedPerson);
+            return new Response("updated candidate with id: %s".formatted(id), "200");
+        } catch (NoCandidateException e) {
+            return new Response("cannot remove, candidate with id: %s not found".formatted(id), "204");
+        }
+    }
+
+    public Response updatePersonById(Long id, String name, List<String> rawGiftIdeas) {
+        try {
+            val foundPerson = getPersonById(id);
+            removePersonById(id);
+            val mappedGiftIdeas = rawGiftIdeas.stream().map(GiftIdea::new).toList();
+            val updatedPerson = new Person(foundPerson.getId(), name, mappedGiftIdeas);
+            persons.add(updatedPerson);
+            return new Response("updated candidate with id: %s".formatted(id), "200");
+        } catch (NoCandidateException e) {
+            return new Response("cannot remove, candidate with id: %s not found".formatted(id), "204");
+        }
     }
 
     public Response removePersonById(Long id) {
