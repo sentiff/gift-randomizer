@@ -80,9 +80,45 @@ public class PersonController {
     }
 
     @PostMapping("/updatePersonById")
-    public ResponseEntity<String> updatePersonById(@RequestParam(value = "id") Long id) {
+    public ResponseEntity<String> updatePersonById(@RequestParam(value = "id") Long id, @RequestParam(value = "name") String name, @RequestParam(value = "gift ideas") List<String> rawGiftIdeas) {
         try {
-            val dbResponse = inMemoryDB.updatePersonById(id);
+            val dbResponse = inMemoryDB.updatePersonById(id, name, rawGiftIdeas);
+            return createResponse(
+                    jsonUtils.toJson(dbResponse),
+                    APPLICATION_JSON,
+                    HttpStatus.OK
+            );
+        } catch (Exception e) {
+            return createResponse(
+                    e.getMessage(),
+                    TEXT_PLAIN,
+                    HttpStatus.BAD_GATEWAY
+            );
+        }
+    }
+
+    @PostMapping("/updatePersonNameById")
+    public ResponseEntity<String> updatePersonById(@RequestParam(value = "id") Long id, @RequestParam(value = "name") String name) {
+        try {
+            val dbResponse = inMemoryDB.updatePersonById(id, name);
+            return createResponse(
+                    jsonUtils.toJson(dbResponse),
+                    APPLICATION_JSON,
+                    HttpStatus.OK
+            );
+        } catch (Exception e) {
+            return createResponse(
+                    e.getMessage(),
+                    TEXT_PLAIN,
+                    HttpStatus.BAD_GATEWAY
+            );
+        }
+    }
+
+    @PostMapping("/updatePersonGiftIdeasById")
+    public ResponseEntity<String> updatePersonById(@RequestParam(value = "id") Long id, @RequestParam(value = "gift ideas") List<String> rawGiftIdeas) {
+        try {
+            val dbResponse = inMemoryDB.updatePersonById(id, rawGiftIdeas);
             return createResponse(
                     jsonUtils.toJson(dbResponse),
                     APPLICATION_JSON,
