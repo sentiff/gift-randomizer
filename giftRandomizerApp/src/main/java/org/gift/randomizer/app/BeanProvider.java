@@ -4,6 +4,7 @@ import org.gift.randomizer.app.db.InMemoryDB;
 import org.gift.randomizer.app.model.GiftIdea;
 import org.gift.randomizer.app.model.Participant;
 import org.gift.randomizer.app.utils.JsonUtils;
+import org.gift.randomizer.app.utils.ResponseUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,6 +17,11 @@ public class BeanProvider {
     @Bean
     public JsonUtils getJsonUtils() {
         return new JsonUtils();
+    }
+
+    @Bean
+    public ResponseUtils getResponseUtils() {
+        return new ResponseUtils();
     }
 
     @Bean
