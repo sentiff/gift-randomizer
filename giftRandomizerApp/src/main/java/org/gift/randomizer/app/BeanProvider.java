@@ -2,7 +2,7 @@ package org.gift.randomizer.app;
 
 import org.gift.randomizer.app.db.InMemoryDB;
 import org.gift.randomizer.app.model.GiftIdea;
-import org.gift.randomizer.app.model.Person;
+import org.gift.randomizer.app.model.Participant;
 import org.gift.randomizer.app.utils.JsonUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,9 +20,9 @@ public class BeanProvider {
 
     @Bean
     public InMemoryDB getPersonsMockDB() {
-        final LinkedList<Person> persons = new LinkedList<>();
-        persons.add(new Person(1L, "Janusz", List.of(new GiftIdea("passerati"))));
-        persons.add(new Person(2L, "Grażynka", List.of(new GiftIdea("djament"))));
-        return new InMemoryDB(persons);
+        final LinkedList<Participant> participants = new LinkedList<>();
+        participants.add(new Participant(1L, "Janusz", List.of(new GiftIdea("passerati"))));
+        participants.add(new Participant(2L, "Grażynka", List.of(new GiftIdea("djament"))));
+        return new InMemoryDB(participants);
     }
 }

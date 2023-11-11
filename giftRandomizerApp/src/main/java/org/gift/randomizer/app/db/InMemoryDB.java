@@ -3,7 +3,7 @@ package org.gift.randomizer.app.db;
 import lombok.AllArgsConstructor;
 import lombok.val;
 import org.gift.randomizer.app.model.GiftIdea;
-import org.gift.randomizer.app.model.Person;
+import org.gift.randomizer.app.model.Participant;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -11,84 +11,84 @@ import java.util.List;
 @AllArgsConstructor
 public class InMemoryDB {
 
-    private LinkedList<Person> persons;
+    private LinkedList<Participant> participants;
 
-    public Person getPersonById(Long id) throws NoCandidateException {
-        val foundPerson = persons.stream()
-                .filter(person -> person.getId().equals(id))
+    public Participant getParticipantById(Long id) throws NoCandidateException {
+        val foundParticipant = participants.stream()
+                .filter(participant -> participant.getId().equals(id))
                 .toList();
 
-        if (!foundPerson.isEmpty()) {
-            return foundPerson.get(0);
+        if (!foundParticipant.isEmpty()) {
+            return foundParticipant.get(0);
         } else {
             throw new NoCandidateException("no candidate with id: %s".formatted(id));
         }
     }
 
-    public Person getPersonByName(String name) throws NoCandidateException {
-        val foundPerson = persons.stream()
-                .filter(person -> person.getName().equals(name))
+    public Participant getParticipantByName(String name) throws NoCandidateException {
+        val foundParticipant = participants.stream()
+                .filter(participant -> participant.getName().equals(name))
                 .toList();
 
-        if (!foundPerson.isEmpty()) {
-            return foundPerson.get(0);
+        if (!foundParticipant.isEmpty()) {
+            return foundParticipant.get(0);
         } else {
             throw new NoCandidateException("no candidate with name: %s".formatted(name));
         }
     }
 
-    public Response addPerson(String name, List<String> rawGiftIdeas) {
+    public Response addParticipant(String name, List<String> rawGiftIdeas) {
         val mappedGiftIdeas = rawGiftIdeas.stream().map(GiftIdea::new).toList();
-        val nextAvailableId = persons.getLast().getId() + 1;
-        persons.add(new Person(nextAvailableId, name, mappedGiftIdeas));
+        val nextAvailableId = participants.getLast().getId() + 1;
+        participants.add(new Participant(nextAvailableId, name, mappedGiftIdeas));
         return new Response("added with id: %s".formatted(nextAvailableId), "200");
     }
 
-    public Response updatePersonById(Long id, String name) {
+    public Response updateParticipantById(Long id, String name) {
         try {
-            val foundPerson = getPersonById(id);
-            removePersonById(id);
-            val updatedPerson = new Person(foundPerson.getId(), name, foundPerson.getGiftIdeas());
-            persons.add(updatedPerson);
-            return new Response("updated candidate with id: %s".formatted(id), "200");
+            val foundParticipant = getParticipantById(id);
+            removeParticipantById(id);
+            val updatedParticipant = new Participant(foundParticipant.getId(), name, foundParticipant.getGiftIdeas());
+            participants.add(updatedParticipant);
+            return new Response("updated participant with id: %s".formatted(id), "200");
         } catch (NoCandidateException e) {
-            return new Response("cannot remove, candidate with id: %s not found".formatted(id), "204");
+            return new Response("cannot remove, participant with id: %s not found".formatted(id), "204");
         }
     }
 
-    public Response updatePersonById(Long id, List<String> rawGiftIdeas) {
+    public Response updateParticipantById(Long id, List<String> rawGiftIdeas) {
         try {
-            val foundPerson = getPersonById(id);
-            removePersonById(id);
+            val foundParticipant = getParticipantById(id);
+            removeParticipantById(id);
             val mappedGiftIdeas = rawGiftIdeas.stream().map(GiftIdea::new).toList();
-            val updatedPerson = new Person(foundPerson.getId(), foundPerson.getName(), mappedGiftIdeas);
-            persons.add(updatedPerson);
+            val updatedParticipant = new Participant(foundParticipant.getId(), foundParticipant.getName(), mappedGiftIdeas);
+            participants.add(updatedParticipant);
             return new Response("updated candidate with id: %s".formatted(id), "200");
         } catch (NoCandidateException e) {
-            return new Response("cannot remove, candidate with id: %s not found".formatted(id), "204");
+            return new Response("cannot remove, participant with id: %s not found".formatted(id), "204");
         }
     }
 
-    public Response updatePersonById(Long id, String name, List<String> rawGiftIdeas) {
+    public Response updateParticipantById(Long id, String name, List<String> rawGiftIdeas) {
         try {
-            val foundPerson = getPersonById(id);
-            removePersonById(id);
+            val foundParticipant = getParticipantById(id);
+            removeParticipantById(id);
             val mappedGiftIdeas = rawGiftIdeas.stream().map(GiftIdea::new).toList();
-            val updatedPerson = new Person(foundPerson.getId(), name, mappedGiftIdeas);
-            persons.add(updatedPerson);
-            return new Response("updated candidate with id: %s".formatted(id), "200");
+            val updatedParticipant = new Participant(foundParticipant.getId(), name, mappedGiftIdeas);
+            participants.add(updatedParticipant);
+            return new Response("updated participant with id: %s".formatted(id), "200");
         } catch (NoCandidateException e) {
-            return new Response("cannot remove, candidate with id: %s not found".formatted(id), "204");
+            return new Response("cannot remove, participant with id: %s not found".formatted(id), "204");
         }
     }
 
-    public Response removePersonById(Long id) {
+    public Response removeParticipantById(Long id) {
         try {
-            val foundPerson = getPersonById(id);
-            persons.remove(foundPerson);
-            return new Response("candidate with id: %s removed".formatted(id), "200");
+            val foundParticipant = getParticipantById(id);
+            participants.remove(foundParticipant);
+            return new Response("participant with id: %s removed".formatted(id), "200");
         } catch (NoCandidateException e) {
-            return new Response("cannot remove, candidate with id: %s not found".formatted(id), "204");
+            return new Response("cannot remove, participant with id: %s not found".formatted(id), "204");
         }
     }
 }

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class PersonController {
+public class ParticipantController {
 
     private final String APPLICATION_JSON = "application/json";
     private final String TEXT_PLAIN = "text/plain";
@@ -25,10 +25,10 @@ public class PersonController {
     @Autowired
     private InMemoryDB inMemoryDB;
 
-    @PostMapping("/getPersonByName")
-    public ResponseEntity<String> getPersonByName(String name) {
+    @GetMapping("/getParticipantByName")
+    public ResponseEntity<String> getParticipantByName(@RequestParam(value = "name") String name) {
         try {
-            val person = inMemoryDB.getPersonByName(name);
+            val person = inMemoryDB.getParticipantByName(name);
             return createResponse(
                     jsonUtils.toJson(person),
                     APPLICATION_JSON,
@@ -43,10 +43,10 @@ public class PersonController {
         }
     }
 
-    @GetMapping("/getPersonById")
-    public ResponseEntity<String> getPersonById(@RequestParam(value = "id", defaultValue = "1") Long id) {
+    @GetMapping("/getParticipantById")
+    public ResponseEntity<String> getParticipantById(@RequestParam(value = "id", defaultValue = "1") Long id) {
         try {
-            val person = inMemoryDB.getPersonById(id);
+            val person = inMemoryDB.getParticipantById(id);
             return createResponse(
                     jsonUtils.toJson(person),
                     APPLICATION_JSON,
@@ -61,10 +61,10 @@ public class PersonController {
         }
     }
 
-    @PostMapping("/addPerson")
-    public ResponseEntity<String> addPerson(@RequestParam(value = "name") String name, @RequestParam(value = "giftIdeas") List<String> giftIdeas) {
+    @PostMapping("/addParticipant")
+    public ResponseEntity<String> addParticipant(@RequestParam(value = "name") String name, @RequestParam(value = "giftIdeas") List<String> giftIdeas) {
         try {
-            val dbResponse = inMemoryDB.addPerson(name, giftIdeas);
+            val dbResponse = inMemoryDB.addParticipant(name, giftIdeas);
             return createResponse(
                     jsonUtils.toJson(dbResponse),
                     APPLICATION_JSON,
@@ -79,10 +79,10 @@ public class PersonController {
         }
     }
 
-    @PostMapping("/updatePersonById")
-    public ResponseEntity<String> updatePersonById(@RequestParam(value = "id") Long id, @RequestParam(value = "name") String name, @RequestParam(value = "gift ideas") List<String> rawGiftIdeas) {
+    @PostMapping("/updateParticipantById")
+    public ResponseEntity<String> updateParticipantById(@RequestParam(value = "id") Long id, @RequestParam(value = "name") String name, @RequestParam(value = "gift ideas") List<String> rawGiftIdeas) {
         try {
-            val dbResponse = inMemoryDB.updatePersonById(id, name, rawGiftIdeas);
+            val dbResponse = inMemoryDB.updateParticipantById(id, name, rawGiftIdeas);
             return createResponse(
                     jsonUtils.toJson(dbResponse),
                     APPLICATION_JSON,
@@ -97,10 +97,10 @@ public class PersonController {
         }
     }
 
-    @PostMapping("/updatePersonNameById")
-    public ResponseEntity<String> updatePersonById(@RequestParam(value = "id") Long id, @RequestParam(value = "name") String name) {
+    @PostMapping("/updateParticipantNameById")
+    public ResponseEntity<String> updateParticipantById(@RequestParam(value = "id") Long id, @RequestParam(value = "name") String name) {
         try {
-            val dbResponse = inMemoryDB.updatePersonById(id, name);
+            val dbResponse = inMemoryDB.updateParticipantById(id, name);
             return createResponse(
                     jsonUtils.toJson(dbResponse),
                     APPLICATION_JSON,
@@ -115,10 +115,10 @@ public class PersonController {
         }
     }
 
-    @PostMapping("/updatePersonGiftIdeasById")
-    public ResponseEntity<String> updatePersonById(@RequestParam(value = "id") Long id, @RequestParam(value = "gift ideas") List<String> rawGiftIdeas) {
+    @PostMapping("/updateParticipantGiftIdeasById")
+    public ResponseEntity<String> updateParticipantById(@RequestParam(value = "id") Long id, @RequestParam(value = "gift ideas") List<String> rawGiftIdeas) {
         try {
-            val dbResponse = inMemoryDB.updatePersonById(id, rawGiftIdeas);
+            val dbResponse = inMemoryDB.updateParticipantById(id, rawGiftIdeas);
             return createResponse(
                     jsonUtils.toJson(dbResponse),
                     APPLICATION_JSON,
@@ -133,10 +133,10 @@ public class PersonController {
         }
     }
 
-    @DeleteMapping("/removePersonById")
-    public ResponseEntity<String> removePersonById(@RequestParam(value = "id") Long id) {
+    @DeleteMapping("/removeParticipantById")
+    public ResponseEntity<String> removeParticipantById(@RequestParam(value = "id") Long id) {
         try {
-            val dbResponse = inMemoryDB.removePersonById(id);
+            val dbResponse = inMemoryDB.removeParticipantById(id);
             return createResponse(
                     jsonUtils.toJson(dbResponse),
                     APPLICATION_JSON,
