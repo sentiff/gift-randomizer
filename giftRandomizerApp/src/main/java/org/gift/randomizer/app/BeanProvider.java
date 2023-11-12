@@ -9,7 +9,6 @@ import org.gift.randomizer.app.utils.ResponseUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -28,7 +27,7 @@ public class BeanProvider {
     }
 
     @Bean
-    public InMemoryDB getPersonsMockDB() {
+    public InMemoryDB getInMemoryDB() {
         final LinkedList<Participant> participants = new LinkedList<>();
         participants.add(new Participant(1L, "Janusz", List.of(new GiftIdea("passerati"))));
         participants.add(new Participant(2L, "Grażynka", List.of(new GiftIdea("djament"))));
