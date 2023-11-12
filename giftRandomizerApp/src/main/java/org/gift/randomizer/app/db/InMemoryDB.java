@@ -1,17 +1,25 @@
 package org.gift.randomizer.app.db;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.val;
 import org.gift.randomizer.app.model.GiftIdea;
+import org.gift.randomizer.app.model.Observation;
 import org.gift.randomizer.app.model.Participant;
+import org.gift.randomizer.app.model.Person;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 @AllArgsConstructor
 public class InMemoryDB {
 
-    private LinkedList<Participant> participants;
+    private final LinkedList<Participant> participants;
+    @Getter
+    private final LinkedList<Observation> observations;
+    private final Random randomGenerator;
 
     public Participant getParticipantById(Long id) throws NoCandidateException {
         val foundParticipant = participants.stream()
@@ -89,6 +97,41 @@ public class InMemoryDB {
             return new Response("participant with id: %s removed".formatted(id), "200");
         } catch (NoCandidateException e) {
             return new Response("cannot remove, participant with id: %s not found".formatted(id), "204");
+        }
+    }
+
+    public Response createObservations(Boolean isRecreate) throws ObservationsAlreadyExisitngException {
+        if (isRecreate || observations.isEmpty()) {
+            observations.clear();
+            generateObservations();
+            return new Response(":)", "200");
+        } else {
+            throw new ObservationsAlreadyExisitngException("observations already generated");
+        }
+    }
+
+
+    private void generateObservations() {
+        try {
+            var generatedNumbers = new ArrayList<>();
+            participants.forEach(
+                    participant -> {
+                        do {
+                            val generatedNumber = randomGenerator.nextInt(participants.size());
+                            if (!generatedNumbers.contains(generatedNumber) && !participants.get(generatedNumber).equals(participant)) {
+                                generatedNumbers.add(generatedNumber);
+                                observations.add(
+                                        new Observation(
+                                                new Person(participant.getId(), participant.getName()),
+                                                participants.get(generatedNumber)
+                                        )
+                                );
+                                break;
+                            }
+                        } while (true);
+                    });
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }
