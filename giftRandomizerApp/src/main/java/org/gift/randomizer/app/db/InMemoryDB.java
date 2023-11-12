@@ -16,6 +16,7 @@ import java.util.Random;
 @AllArgsConstructor
 public class InMemoryDB {
 
+    @Getter
     private final LinkedList<Participant> participants;
     @Getter
     private final LinkedList<Observation> observations;
@@ -109,7 +110,6 @@ public class InMemoryDB {
             throw new ObservationsAlreadyExisitngException("observations already generated");
         }
     }
-
 
     private void generateObservations() {
         try {
