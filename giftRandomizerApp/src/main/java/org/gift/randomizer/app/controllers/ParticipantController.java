@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.val;
 import org.gift.randomizer.app.db.NoCandidateException;
 import org.gift.randomizer.app.db.InMemoryDB;
+import org.gift.randomizer.app.utils.ContentType;
 import org.gift.randomizer.app.utils.JsonUtils;
 import org.gift.randomizer.app.utils.ResponseUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,6 @@ import java.util.List;
 
 @RestController
 public class ParticipantController {
-
-    private final String APPLICATION_JSON = "application/json";
-    private final String TEXT_PLAIN = "text/plain";
 
     @Autowired
     private JsonUtils jsonUtils;
@@ -34,13 +32,13 @@ public class ParticipantController {
             val person = inMemoryDB.getParticipantByName(name);
             return responseUtils.createResponse(
                     jsonUtils.toJson(person),
-                    APPLICATION_JSON,
+                    ContentType.APPLICATION_JSON.value,
                     HttpStatus.OK
             );
         } catch (NoCandidateException | JsonProcessingException e) {
             return responseUtils.createResponse(
                     e.getMessage(),
-                    TEXT_PLAIN,
+                    ContentType.TEXT_PLAIN.value,
                     HttpStatus.BAD_GATEWAY
             );
         }
@@ -52,13 +50,13 @@ public class ParticipantController {
             val person = inMemoryDB.getParticipantById(id);
             return responseUtils.createResponse(
                     jsonUtils.toJson(person),
-                    APPLICATION_JSON,
+                    ContentType.APPLICATION_JSON.value,
                     HttpStatus.OK
             );
         } catch (NoCandidateException | JsonProcessingException e) {
             return responseUtils.createResponse(
                     e.getMessage(),
-                    TEXT_PLAIN,
+                    ContentType.TEXT_PLAIN.value,
                     HttpStatus.BAD_GATEWAY
             );
         }
@@ -70,13 +68,13 @@ public class ParticipantController {
             val dbResponse = inMemoryDB.addParticipant(name, giftIdeas);
             return responseUtils.createResponse(
                     jsonUtils.toJson(dbResponse),
-                    APPLICATION_JSON,
+                    ContentType.APPLICATION_JSON.value,
                     HttpStatus.OK
             );
         } catch (Exception e) {
             return responseUtils.createResponse(
                     e.getMessage(),
-                    TEXT_PLAIN,
+                    ContentType.TEXT_PLAIN.value,
                     HttpStatus.BAD_GATEWAY
             );
         }
@@ -88,13 +86,13 @@ public class ParticipantController {
             val dbResponse = inMemoryDB.updateParticipantById(id, name, rawGiftIdeas);
             return responseUtils.createResponse(
                     jsonUtils.toJson(dbResponse),
-                    APPLICATION_JSON,
+                    ContentType.APPLICATION_JSON.value,
                     HttpStatus.OK
             );
         } catch (Exception e) {
             return responseUtils.createResponse(
                     e.getMessage(),
-                    TEXT_PLAIN,
+                    ContentType.TEXT_PLAIN.value,
                     HttpStatus.BAD_GATEWAY
             );
         }
@@ -106,13 +104,13 @@ public class ParticipantController {
             val dbResponse = inMemoryDB.updateParticipantById(id, name);
             return responseUtils.createResponse(
                     jsonUtils.toJson(dbResponse),
-                    APPLICATION_JSON,
+                    ContentType.APPLICATION_JSON.value,
                     HttpStatus.OK
             );
         } catch (Exception e) {
             return responseUtils.createResponse(
                     e.getMessage(),
-                    TEXT_PLAIN,
+                    ContentType.TEXT_PLAIN.value,
                     HttpStatus.BAD_GATEWAY
             );
         }
@@ -124,13 +122,13 @@ public class ParticipantController {
             val dbResponse = inMemoryDB.updateParticipantById(id, rawGiftIdeas);
             return responseUtils.createResponse(
                     jsonUtils.toJson(dbResponse),
-                    APPLICATION_JSON,
+                    ContentType.APPLICATION_JSON.value,
                     HttpStatus.OK
             );
         } catch (Exception e) {
             return responseUtils.createResponse(
                     e.getMessage(),
-                    TEXT_PLAIN,
+                    ContentType.TEXT_PLAIN.value,
                     HttpStatus.BAD_GATEWAY
             );
         }
@@ -142,13 +140,13 @@ public class ParticipantController {
             val dbResponse = inMemoryDB.removeParticipantById(id);
             return responseUtils.createResponse(
                     jsonUtils.toJson(dbResponse),
-                    APPLICATION_JSON,
+                    ContentType.APPLICATION_JSON.value,
                     HttpStatus.OK
             );
         } catch (Exception e) {
             return responseUtils.createResponse(
                     e.getMessage(),
-                    TEXT_PLAIN,
+                    ContentType.TEXT_PLAIN.value,
                     HttpStatus.BAD_GATEWAY
             );
         }
