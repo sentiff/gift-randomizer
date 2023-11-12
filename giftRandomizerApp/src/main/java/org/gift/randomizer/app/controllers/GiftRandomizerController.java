@@ -1,10 +1,7 @@
 package org.gift.randomizer.app.controllers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.val;
 import org.gift.randomizer.app.db.InMemoryDB;
-import org.gift.randomizer.app.db.NoCandidateException;
-import org.gift.randomizer.app.db.Response;
 import org.gift.randomizer.app.utils.ContentType;
 import org.gift.randomizer.app.utils.JsonUtils;
 import org.gift.randomizer.app.utils.ResponseUtils;
