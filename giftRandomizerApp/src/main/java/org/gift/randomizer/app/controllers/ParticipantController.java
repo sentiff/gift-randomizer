@@ -26,6 +26,25 @@ public class ParticipantController {
     @Autowired
     private InMemoryDB inMemoryDB;
 
+
+    @GetMapping("/getParticipants")
+    public ResponseEntity<String> getParticipants() {
+        try {
+            val person = inMemoryDB.getParticipants();
+            return responseUtils.createResponse(
+                    jsonUtils.toJson(person),
+                    ContentType.APPLICATION_JSON.value,
+                    HttpStatus.OK
+            );
+        } catch (JsonProcessingException e) {
+            return responseUtils.createResponse(
+                    e.getMessage(),
+                    ContentType.TEXT_PLAIN.value,
+                    HttpStatus.BAD_GATEWAY
+            );
+        }
+    }
+
     @GetMapping("/getParticipantByName")
     public ResponseEntity<String> getParticipantByName(@RequestParam(value = "name") String name) {
         try {
