@@ -8,10 +8,7 @@ import org.gift.randomizer.app.utils.ResponseUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class GiftRandomizerController {
@@ -26,7 +23,7 @@ public class GiftRandomizerController {
     private InMemoryDB inMemoryDB;
 
     @PostMapping("/createObservations")
-    public ResponseEntity<String> createObservations() {
+    public ResponseEntity<String> createObservations(@RequestParam(value = "fairnessEnabled") Boolean areObservationsFair) {
         try {
             val response = inMemoryDB.createObservations(false);
             return responseUtils.createResponse(
