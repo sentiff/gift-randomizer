@@ -2,7 +2,7 @@ package org.sentiff.gift.randomizer.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.val;
-import org.sentiff.gift.randomizer.db.ParticipantException;
+import org.sentiff.gift.randomizer.db.model.exceptions.ParticipantException;
 import org.sentiff.gift.randomizer.db.InMemoryDB;
 import org.sentiff.gift.randomizer.utils.ContentType;
 import org.sentiff.gift.randomizer.utils.JsonUtils;

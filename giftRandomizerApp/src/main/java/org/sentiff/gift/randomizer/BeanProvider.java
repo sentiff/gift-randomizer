@@ -1,9 +1,9 @@
 package org.sentiff.gift.randomizer;
 
 import org.sentiff.gift.randomizer.db.InMemoryDB;
-import org.sentiff.gift.randomizer.model.GiftIdea;
-import org.sentiff.gift.randomizer.model.Observation;
-import org.sentiff.gift.randomizer.model.Participant;
+import org.sentiff.gift.randomizer.db.model.GiftIdea;
+import org.sentiff.gift.randomizer.db.model.Observation;
+import org.sentiff.gift.randomizer.db.model.Participant;
 import org.sentiff.gift.randomizer.utils.JsonUtils;
 import org.sentiff.gift.randomizer.utils.ResponseUtils;
 import org.springframework.context.annotation.Bean;

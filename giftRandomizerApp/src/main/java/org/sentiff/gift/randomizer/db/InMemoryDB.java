@@ -3,10 +3,9 @@ package org.sentiff.gift.randomizer.db;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.val;
-import org.sentiff.gift.randomizer.model.GiftIdea;
-import org.sentiff.gift.randomizer.model.Observation;
-import org.sentiff.gift.randomizer.model.Participant;
-import org.sentiff.gift.randomizer.model.Person;
+import org.sentiff.gift.randomizer.db.model.*;
+import org.sentiff.gift.randomizer.db.model.exceptions.ObservationsException;
+import org.sentiff.gift.randomizer.db.model.exceptions.ParticipantException;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
