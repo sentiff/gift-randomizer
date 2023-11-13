@@ -104,7 +104,7 @@ public class InMemoryDB {
     public Response removeObservations() throws ObservationsException {
         if (!observations.isEmpty()) {
             observations.clear();
-            return new Response(":)", "200");
+            return new Response("observations removed", "200");
         } else {
             throw new ObservationsException("no observations to remove");
         }
@@ -114,7 +114,8 @@ public class InMemoryDB {
         if (isRecreate || observations.isEmpty()) {
             observations.clear();
             generateObservations();
-            return new Response(":)", "200");
+            val re = isRecreate ? "re-" : "";
+            return new Response("%s observations %screated".formatted(observations.size(), re), "200");
         } else {
             throw new ObservationsException("observations already generated");
         }
