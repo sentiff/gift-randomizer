@@ -101,13 +101,22 @@ public class InMemoryDB {
         }
     }
 
-    public Response createObservations(Boolean isRecreate) throws ObservationsAlreadyExisitngException {
+    public Response removeObservations() throws ObservationsException {
+        if (!observations.isEmpty()) {
+            observations.clear();
+            return new Response(":)", "200");
+        } else {
+            throw new ObservationsException("no observations to remove");
+        }
+    }
+
+    public Response createObservations(Boolean isRecreate) throws ObservationsException {
         if (isRecreate || observations.isEmpty()) {
             observations.clear();
             generateObservations();
             return new Response(":)", "200");
         } else {
-            throw new ObservationsAlreadyExisitngException("observations already generated");
+            throw new ObservationsException("observations already generated");
         }
     }
 
@@ -134,4 +143,5 @@ public class InMemoryDB {
             throw new RuntimeException(e);
         }
     }
+
 }
