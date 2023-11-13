@@ -22,7 +22,7 @@ public class InMemoryDB {
     private final LinkedList<Observation> observations;
     private final Random randomGenerator;
 
-    public Participant getParticipantById(Long id) throws NoCandidateException {
+    public Participant getParticipantById(Long id) throws ParticipantException {
         val foundParticipant = participants.stream()
                 .filter(participant -> participant.getId().equals(id))
                 .toList();
@@ -30,11 +30,11 @@ public class InMemoryDB {
         if (!foundParticipant.isEmpty()) {
             return foundParticipant.get(0);
         } else {
-            throw new NoCandidateException("no candidate with id: %s".formatted(id));
+            throw new ParticipantException("no participant with id: %s".formatted(id));
         }
     }
 
-    public Participant getParticipantByName(String name) throws NoCandidateException {
+    public Participant getParticipantByName(String name) throws ParticipantException {
         val foundParticipant = participants.stream()
                 .filter(participant -> participant.getName().equals(name))
                 .toList();
@@ -42,7 +42,7 @@ public class InMemoryDB {
         if (!foundParticipant.isEmpty()) {
             return foundParticipant.get(0);
         } else {
-            throw new NoCandidateException("no candidate with name: %s".formatted(name));
+            throw new ParticipantException("no participant with name: %s".formatted(name));
         }
     }
 
@@ -50,7 +50,7 @@ public class InMemoryDB {
         val mappedGiftIdeas = rawGiftIdeas.stream().map(GiftIdea::new).toList();
         val nextAvailableId = participants.getLast().getId() + 1;
         participants.add(new Participant(nextAvailableId, name, mappedGiftIdeas));
-        return new Response("added with id: %s".formatted(nextAvailableId), "200");
+        return new Response("added participant with id: %s".formatted(nextAvailableId), "200");
     }
 
     public Response updateParticipantById(Long id, String name) {
@@ -60,7 +60,7 @@ public class InMemoryDB {
             val updatedParticipant = new Participant(foundParticipant.getId(), name, foundParticipant.getGiftIdeas());
             participants.add(updatedParticipant);
             return new Response("updated participant with id: %s".formatted(id), "200");
-        } catch (NoCandidateException e) {
+        } catch (ParticipantException e) {
             return new Response("cannot remove, participant with id: %s not found".formatted(id), "204");
         }
     }
@@ -73,7 +73,7 @@ public class InMemoryDB {
             val updatedParticipant = new Participant(foundParticipant.getId(), foundParticipant.getName(), mappedGiftIdeas);
             participants.add(updatedParticipant);
             return new Response("updated candidate with id: %s".formatted(id), "200");
-        } catch (NoCandidateException e) {
+        } catch (ParticipantException e) {
             return new Response("cannot remove, participant with id: %s not found".formatted(id), "204");
         }
     }
@@ -86,7 +86,7 @@ public class InMemoryDB {
             val updatedParticipant = new Participant(foundParticipant.getId(), name, mappedGiftIdeas);
             participants.add(updatedParticipant);
             return new Response("updated participant with id: %s".formatted(id), "200");
-        } catch (NoCandidateException e) {
+        } catch (ParticipantException e) {
             return new Response("cannot remove, participant with id: %s not found".formatted(id), "204");
         }
     }
@@ -96,7 +96,7 @@ public class InMemoryDB {
             val foundParticipant = getParticipantById(id);
             participants.remove(foundParticipant);
             return new Response("participant with id: %s removed".formatted(id), "200");
-        } catch (NoCandidateException e) {
+        } catch (ParticipantException e) {
             return new Response("cannot remove, participant with id: %s not found".formatted(id), "204");
         }
     }
