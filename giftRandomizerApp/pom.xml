@@ -11,12 +11,12 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>org.example</groupId>
+    <groupId>org.sentiff.giftrandomizer</groupId>
     <artifactId>giftRandomizerApp</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
-    <name>demo</name>
-    <description>Demo project for Spring Boot</description>
+    <name>giftRandomizer</name>
+    <description>spring based rest service for gift raffle</description>
 
     <properties>
         <java.version>17</java.version>
