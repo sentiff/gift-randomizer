@@ -1,12 +1,12 @@
-package org.gift.randomizer.app.db;
+package org.sentiff.gift.randomizer.db;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.val;
-import org.gift.randomizer.app.model.GiftIdea;
-import org.gift.randomizer.app.model.Observation;
-import org.gift.randomizer.app.model.Participant;
-import org.gift.randomizer.app.model.Person;
+import org.sentiff.gift.randomizer.model.GiftIdea;
+import org.sentiff.gift.randomizer.model.Observation;
+import org.sentiff.gift.randomizer.model.Participant;
+import org.sentiff.gift.randomizer.model.Person;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

@@ -1,4 +1,4 @@
-package org.gift.randomizer.app.model;
+package org.sentiff.gift.randomizer.model;
 
 public record GiftIdea(String rawText) {
 }

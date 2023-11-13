@@ -1,4 +1,4 @@
-package org.gift.randomizer.app.utils;
+package org.sentiff.gift.randomizer.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

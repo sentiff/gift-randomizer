@@ -1,4 +1,4 @@
-package org.gift.randomizer.app.utils;
+package org.sentiff.gift.randomizer.utils;
 
 public enum ContentType {
     APPLICATION_JSON("application/json"),

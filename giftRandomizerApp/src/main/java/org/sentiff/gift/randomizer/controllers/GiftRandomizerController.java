@@ -1,10 +1,10 @@
-package org.gift.randomizer.app.controllers;
+package org.sentiff.gift.randomizer.controllers;
 
 import lombok.val;
-import org.gift.randomizer.app.db.InMemoryDB;
-import org.gift.randomizer.app.utils.ContentType;
-import org.gift.randomizer.app.utils.JsonUtils;
-import org.gift.randomizer.app.utils.ResponseUtils;
+import org.sentiff.gift.randomizer.db.InMemoryDB;
+import org.sentiff.gift.randomizer.utils.ContentType;
+import org.sentiff.gift.randomizer.utils.JsonUtils;
+import org.sentiff.gift.randomizer.utils.ResponseUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
