@@ -93,4 +93,40 @@ public class GiftRandomizerController {
             );
         }
     }
+
+    @GetMapping("/getObservationById")
+    public ResponseEntity<String> getObservationById(@RequestParam(value = "id", defaultValue = "1") Long id) {
+        try {
+            val response = inMemoryDB.getObservationById(id);
+            return responseUtils.createResponse(
+                    jsonUtils.toJson(response),
+                    ContentType.APPLICATION_JSON.value,
+                    HttpStatus.OK
+            );
+        } catch (Exception e) {
+            return responseUtils.createResponse(
+                    e.getMessage(),
+                    ContentType.TEXT_PLAIN.value,
+                    HttpStatus.BAD_GATEWAY
+            );
+        }
+    }
+
+    @GetMapping("/getObservationByName")
+    public ResponseEntity<String> getObservationByName(@RequestParam(value = "Name") String name) {
+        try {
+            val response = inMemoryDB.getObservationByName(name);
+            return responseUtils.createResponse(
+                    jsonUtils.toJson(response),
+                    ContentType.APPLICATION_JSON.value,
+                    HttpStatus.OK
+            );
+        } catch (Exception e) {
+            return responseUtils.createResponse(
+                    e.getMessage(),
+                    ContentType.TEXT_PLAIN.value,
+                    HttpStatus.BAD_GATEWAY
+            );
+        }
+    }
 }
