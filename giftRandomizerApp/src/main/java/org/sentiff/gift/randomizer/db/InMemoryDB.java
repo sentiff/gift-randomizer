@@ -1,5 +1,6 @@
 package org.sentiff.gift.randomizer.db;
 
+import io.swagger.v3.oas.models.links.Link;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.val;
@@ -120,6 +121,29 @@ public class InMemoryDB {
         }
     }
 
+    public Observation getObservationById(Long id) throws ObservationsException {
+        val foundObservation = observations.stream()
+                .filter(observation -> observation.who().getId().equals(id))
+                .toList();
+        if (!foundObservation.isEmpty()) {
+            return foundObservation.get(0);
+        } else {
+            throw new ObservationsException("no observation with id: %s".formatted(id));
+        }
+    }
+
+    public Observation getObservationByName(String name) throws ObservationsException {
+        val foundObservation = observations.stream()
+                .filter(observation -> observation.who().getName().equals(name))
+                .toList();
+        if (!foundObservation.isEmpty()) {
+            return foundObservation.get(0);
+        } else {
+            throw new ObservationsException("no observation with name: %s".formatted(name));
+        }
+    }
+
+
     private void generateObservations() {
         try {
             var generatedNumbers = new ArrayList<>();
@@ -143,5 +167,4 @@ public class InMemoryDB {
             throw new RuntimeException(e);
         }
     }
-
 }
