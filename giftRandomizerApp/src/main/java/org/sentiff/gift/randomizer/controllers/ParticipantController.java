@@ -27,6 +27,9 @@ public class ParticipantController {
     private InMemoryDB inMemoryDB;
 
 
+    private final String UNKNOWN_ERROR = "UNKNOWN ERROR";
+
+
     @GetMapping("/getParticipants")
     public ResponseEntity<String> getParticipants() {
         try {
@@ -41,6 +44,12 @@ public class ParticipantController {
                     e.getMessage(),
                     ContentType.TEXT_PLAIN.value,
                     HttpStatus.BAD_GATEWAY
+            );
+        } catch (Exception e) {
+            return responseUtils.createResponse(
+                    UNKNOWN_ERROR,
+                    ContentType.TEXT_PLAIN.value,
+                    HttpStatus.INTERNAL_SERVER_ERROR
             );
         }
     }
@@ -60,6 +69,12 @@ public class ParticipantController {
                     ContentType.TEXT_PLAIN.value,
                     HttpStatus.BAD_GATEWAY
             );
+        } catch (Exception e) {
+            return responseUtils.createResponse(
+                    UNKNOWN_ERROR,
+                    ContentType.TEXT_PLAIN.value,
+                    HttpStatus.INTERNAL_SERVER_ERROR
+            );
         }
     }
 
@@ -77,6 +92,12 @@ public class ParticipantController {
                     e.getMessage(),
                     ContentType.TEXT_PLAIN.value,
                     HttpStatus.BAD_GATEWAY
+            );
+        } catch (Exception e) {
+            return responseUtils.createResponse(
+                    UNKNOWN_ERROR,
+                    ContentType.TEXT_PLAIN.value,
+                    HttpStatus.INTERNAL_SERVER_ERROR
             );
         }
     }
