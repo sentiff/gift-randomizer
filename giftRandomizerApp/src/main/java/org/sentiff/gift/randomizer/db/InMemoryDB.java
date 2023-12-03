@@ -8,10 +8,7 @@ import org.sentiff.gift.randomizer.db.model.*;
 import org.sentiff.gift.randomizer.db.model.exceptions.ObservationsException;
 import org.sentiff.gift.randomizer.db.model.exceptions.ParticipantException;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @AllArgsConstructor
 public class InMemoryDB {
@@ -48,7 +45,12 @@ public class InMemoryDB {
 
     public Response addParticipant(String name, List<String> rawGiftIdeas) {
         val mappedGiftIdeas = rawGiftIdeas.stream().map(GiftIdea::new).toList();
-        val nextAvailableId = participants.getLast().getId() + 1;
+        long nextAvailableId;
+        try {
+            nextAvailableId = participants.getLast().getId() + 1;
+        } catch (NoSuchElementException e) {
+            nextAvailableId = 1;
+        }
         participants.add(new Participant(nextAvailableId, name, mappedGiftIdeas));
         return new Response("added participant with id: %s".formatted(nextAvailableId), "200");
     }
