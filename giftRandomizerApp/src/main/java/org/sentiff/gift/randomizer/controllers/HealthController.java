@@ -1,4 +1,4 @@
-package org.gift.randomizer.app.controllers;
+package org.sentiff.gift.randomizer.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

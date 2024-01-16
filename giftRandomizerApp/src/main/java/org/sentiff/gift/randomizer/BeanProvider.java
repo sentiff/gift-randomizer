@@ -1,11 +1,13 @@
-package org.gift.randomizer.app;
+package org.sentiff.gift.randomizer;
 
-import org.gift.randomizer.app.db.InMemoryDB;
-import org.gift.randomizer.app.model.GiftIdea;
-import org.gift.randomizer.app.model.Observation;
-import org.gift.randomizer.app.model.Participant;
-import org.gift.randomizer.app.utils.JsonUtils;
-import org.gift.randomizer.app.utils.ResponseUtils;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+import org.sentiff.gift.randomizer.db.InMemoryDB;
+import org.sentiff.gift.randomizer.db.model.GiftIdea;
+import org.sentiff.gift.randomizer.db.model.Observation;
+import org.sentiff.gift.randomizer.db.model.Participant;
+import org.sentiff.gift.randomizer.utils.JsonUtils;
+import org.sentiff.gift.randomizer.utils.ResponseUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,6 +17,14 @@ import java.util.Random;
 
 @Configuration
 public class BeanProvider {
+
+    @Bean
+    public OpenAPI apiDocConfig() {
+        return new OpenAPI()
+                .info(new Info()
+                        .title("gift randomizer API")
+                        .version("0.0.1-SNAPSHOT"));
+    }
 
     @Bean
     public JsonUtils getJsonUtils() {

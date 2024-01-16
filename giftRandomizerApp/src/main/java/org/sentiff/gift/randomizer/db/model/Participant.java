@@ -1,4 +1,4 @@
-package org.gift.randomizer.app.model;
+package org.sentiff.gift.randomizer.db.model;
 
 import lombok.Getter;
 

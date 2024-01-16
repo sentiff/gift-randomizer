@@ -1,4 +1,4 @@
-package org.gift.randomizer.app.utils;
+package org.sentiff.gift.randomizer.utils;
 
 import lombok.val;
 import org.springframework.http.HttpStatus;
