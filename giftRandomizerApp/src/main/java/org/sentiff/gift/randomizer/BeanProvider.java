@@ -1,5 +1,7 @@
 package org.sentiff.gift.randomizer;
 
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
 import org.sentiff.gift.randomizer.db.InMemoryDB;
 import org.sentiff.gift.randomizer.db.model.GiftIdea;
 import org.sentiff.gift.randomizer.db.model.Observation;
@@ -15,6 +17,14 @@ import java.util.Random;
 
 @Configuration
 public class BeanProvider {
+
+    @Bean
+    public OpenAPI apiDocConfig() {
+        return new OpenAPI()
+                .info(new Info()
+                        .title("gift randomizer API")
+                        .version("0.0.1-SNAPSHOT"));
+    }
 
     @Bean
     public JsonUtils getJsonUtils() {
