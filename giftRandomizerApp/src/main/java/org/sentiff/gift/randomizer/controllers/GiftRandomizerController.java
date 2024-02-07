@@ -1,7 +1,7 @@
 package org.sentiff.gift.randomizer.controllers;
 
 import lombok.val;
-import org.sentiff.gift.randomizer.db.InMemoryDB;
+import org.sentiff.gift.randomizer.commons.db.InMemoryDB;
 import org.sentiff.gift.randomizer.utils.ContentType;
 import org.sentiff.gift.randomizer.utils.JsonUtils;
 import org.sentiff.gift.randomizer.utils.ResponseUtils;

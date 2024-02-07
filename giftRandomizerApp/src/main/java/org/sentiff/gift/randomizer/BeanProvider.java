@@ -2,10 +2,10 @@ package org.sentiff.gift.randomizer;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
-import org.sentiff.gift.randomizer.db.InMemoryDB;
-import org.sentiff.gift.randomizer.db.model.GiftIdea;
-import org.sentiff.gift.randomizer.db.model.Observation;
-import org.sentiff.gift.randomizer.db.model.Participant;
+import org.sentiff.gift.randomizer.commons.db.InMemoryDB;
+import org.sentiff.gift.randomizer.commons.db.model.GiftIdea;
+import org.sentiff.gift.randomizer.commons.db.model.Observation;
+import org.sentiff.gift.randomizer.commons.db.model.Participant;
 import org.sentiff.gift.randomizer.utils.JsonUtils;
 import org.sentiff.gift.randomizer.utils.ResponseUtils;
 import org.springframework.context.annotation.Bean;
