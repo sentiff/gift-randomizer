@@ -11,25 +11,37 @@ type Observation {
     toWhom: Participant
 }
 
-type Participant implements Person {
+type Participant {
     id: Int
     name: String
     giftIdeas: [GiftIdea]
 }
 
-interface Person {
+type Person {
     id: Int
     name: String
 }
 
 type Query {
+    #participant controller
     participantByName(name: String): [Participant]
     participantById(id: Int): [Participant]
+
+    #gift randomizer controller
+    observations: [Observation]
+    observationById(id: Int): [Participant]
+    observationByName(name: String): [Participant]
 }
 
 type Mutation {
+    #participant controller
     addParticipant(name: String, giftIdeas: [GiftIdeaInput]): String
     updateParticipantName(id:Int, name: String): String
     updateParticipantGiftIdeas(id: Int, giftIdeas: [GiftIdeaInput]): String
     removeParticipant(id: Int): String
+
+    #gift randomizer controller
+    createObservations(areObservationsFair: Boolean): String
+    recreateObservations(areObservationsFair: Boolean): String
+    removeObservations: String
 }
