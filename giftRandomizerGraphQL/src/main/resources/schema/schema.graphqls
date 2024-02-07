@@ -1,0 +1,35 @@
+type GiftIdea {
+    rawText: String
+}
+
+input GiftIdeaInput {
+    rawText: String!
+}
+
+type Observation {
+    who: Person
+    toWhom: Participant
+}
+
+type Participant implements Person {
+    id: Int
+    name: String
+    giftIdeas: [GiftIdea]
+}
+
+interface Person {
+    id: Int
+    name: String
+}
+
+type Query {
+    participantByName(name: String): [Participant]
+    participantById(id: Int): [Participant]
+}
+
+type Mutation {
+    addParticipant(name: String, giftIdeas: [GiftIdeaInput]): String
+    updateParticipantName(id:Int, name: String): String
+    updateParticipantGiftIdeas(id: Int, giftIdeas: [GiftIdeaInput]): String
+    removeParticipant(id: Int): String
+}
