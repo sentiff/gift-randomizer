@@ -1,12 +1,11 @@
-package org.sentiff.gift.randomizer.db;
+package org.sentiff.gift.randomizer.commons.db;
 
-import io.swagger.v3.oas.models.links.Link;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.val;
-import org.sentiff.gift.randomizer.db.model.*;
-import org.sentiff.gift.randomizer.db.model.exceptions.ObservationsException;
-import org.sentiff.gift.randomizer.db.model.exceptions.ParticipantException;
+import org.sentiff.gift.randomizer.commons.db.model.*;
+import org.sentiff.gift.randomizer.commons.db.model.exceptions.ObservationsException;
+import org.sentiff.gift.randomizer.commons.db.model.exceptions.ParticipantException;
 
 import java.util.*;
 
