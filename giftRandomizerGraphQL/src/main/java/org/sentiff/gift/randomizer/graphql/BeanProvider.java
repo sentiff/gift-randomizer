@@ -6,6 +6,7 @@ import org.sentiff.gift.randomizer.commons.db.InMemoryDB;
 import org.sentiff.gift.randomizer.commons.db.model.GiftIdea;
 import org.sentiff.gift.randomizer.commons.db.model.Observation;
 import org.sentiff.gift.randomizer.commons.db.model.Participant;
+import org.sentiff.gift.randomizer.commons.db.utils.JsonUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -22,6 +23,11 @@ public class BeanProvider {
                 .info(new Info()
                         .title("gift randomizer graphQL")
                         .version("0.0.1-SNAPSHOT"));
+    }
+
+    @Bean
+    public JsonUtils getJsonUtils() {
+        return new JsonUtils();
     }
 
     @Bean
