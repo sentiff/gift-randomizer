@@ -5,7 +5,7 @@ import lombok.val;
 import org.sentiff.gift.randomizer.commons.db.InMemoryDB;
 import org.sentiff.gift.randomizer.commons.db.model.exceptions.ParticipantException;
 import org.sentiff.gift.randomizer.utils.ContentType;
-import org.sentiff.gift.randomizer.utils.JsonUtils;
+import org.sentiff.gift.randomizer.commons.db.utils.JsonUtils;
 import org.sentiff.gift.randomizer.utils.ResponseUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
