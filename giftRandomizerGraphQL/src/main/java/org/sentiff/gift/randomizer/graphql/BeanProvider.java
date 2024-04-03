@@ -1,4 +1,4 @@
-package org.sentiff.gift.randomizer;
+package org.sentiff.gift.randomizer.graphql;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
@@ -7,7 +7,6 @@ import org.sentiff.gift.randomizer.commons.db.model.GiftIdea;
 import org.sentiff.gift.randomizer.commons.db.model.Observation;
 import org.sentiff.gift.randomizer.commons.db.model.Participant;
 import org.sentiff.gift.randomizer.commons.db.utils.JsonUtils;
-import org.sentiff.gift.randomizer.utils.ResponseUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -22,18 +21,13 @@ public class BeanProvider {
     public OpenAPI apiDocConfig() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("gift randomizer API")
+                        .title("gift randomizer graphQL")
                         .version("0.0.1-SNAPSHOT"));
     }
 
     @Bean
     public JsonUtils getJsonUtils() {
         return new JsonUtils();
-    }
-
-    @Bean
-    public ResponseUtils getResponseUtils() {
-        return new ResponseUtils();
     }
 
     @Bean
