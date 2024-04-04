@@ -1,5 +1,3 @@
-package utils;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
