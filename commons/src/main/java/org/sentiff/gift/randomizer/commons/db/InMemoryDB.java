@@ -10,7 +10,7 @@ import org.sentiff.gift.randomizer.commons.db.model.exceptions.ParticipantExcept
 import java.util.*;
 
 @AllArgsConstructor
-public class InMemoryDB {
+public class InMemoryDB implements Storage {
 
     @Getter
     private final LinkedList<Participant> participants;
@@ -18,7 +18,8 @@ public class InMemoryDB {
     private final LinkedList<Observation> observations;
     private final Random randomGenerator;
 
-    public Participant getParticipantById(Long id) throws ParticipantException {
+    @Override
+    public Participant getParticipant(Long id) throws ParticipantException {
         val foundParticipant = participants.stream()
                 .filter(participant -> participant.getId().equals(id))
                 .toList();
@@ -30,7 +31,8 @@ public class InMemoryDB {
         }
     }
 
-    public Participant getParticipantByName(String name) throws ParticipantException {
+    @Override
+    public Participant getParticipant(String name) throws ParticipantException {
         val foundParticipant = participants.stream()
                 .filter(participant -> participant.getName().equals(name))
                 .toList();
@@ -42,6 +44,7 @@ public class InMemoryDB {
         }
     }
 
+    @Override
     public Response addParticipant(String name, List<String> rawGiftIdeas) {
         val mappedGiftIdeas = rawGiftIdeas.stream().map(GiftIdea::new).toList();
         long nextAvailableId;
@@ -54,10 +57,11 @@ public class InMemoryDB {
         return new Response("added participant with id: %s".formatted(nextAvailableId), "200");
     }
 
-    public Response updateParticipantById(Long id, String name) {
+    @Override
+    public Response updateParticipant(Long id, String name) {
         try {
-            val foundParticipant = getParticipantById(id);
-            removeParticipantById(id);
+            val foundParticipant = getParticipant(id);
+            removeParticipant(id);
             val updatedParticipant = new Participant(foundParticipant.getId(), name, foundParticipant.getGiftIdeas());
             participants.add(updatedParticipant);
             return new Response("updated participant with id: %s".formatted(id), "200");
@@ -66,10 +70,11 @@ public class InMemoryDB {
         }
     }
 
-    public Response updateParticipantById(Long id, List<String> rawGiftIdeas) {
+    @Override
+    public Response updateParticipant(Long id, List<String> rawGiftIdeas) {
         try {
-            val foundParticipant = getParticipantById(id);
-            removeParticipantById(id);
+            val foundParticipant = getParticipant(id);
+            removeParticipant(id);
             val mappedGiftIdeas = rawGiftIdeas.stream().map(GiftIdea::new).toList();
             val updatedParticipant = new Participant(foundParticipant.getId(), foundParticipant.getName(), mappedGiftIdeas);
             participants.add(updatedParticipant);
@@ -79,10 +84,11 @@ public class InMemoryDB {
         }
     }
 
-    public Response updateParticipantById(Long id, String name, List<String> rawGiftIdeas) {
+    @Override
+    public Response updateParticipant(Long id, String name, List<String> rawGiftIdeas) {
         try {
-            val foundParticipant = getParticipantById(id);
-            removeParticipantById(id);
+            val foundParticipant = getParticipant(id);
+            removeParticipant(id);
             val mappedGiftIdeas = rawGiftIdeas.stream().map(GiftIdea::new).toList();
             val updatedParticipant = new Participant(foundParticipant.getId(), name, mappedGiftIdeas);
             participants.add(updatedParticipant);
@@ -92,9 +98,10 @@ public class InMemoryDB {
         }
     }
 
-    public Response removeParticipantById(Long id) {
+    @Override
+    public Response removeParticipant(Long id) throws ParticipantException {
         try {
-            val foundParticipant = getParticipantById(id);
+            val foundParticipant = getParticipant(id);
             participants.remove(foundParticipant);
             return new Response("participant with id: %s removed".formatted(id), "200");
         } catch (ParticipantException e) {
@@ -111,6 +118,7 @@ public class InMemoryDB {
         }
     }
 
+    @Override
     public Response createObservations(Boolean isRecreate) throws ObservationsException {
         if (isRecreate || observations.isEmpty()) {
             observations.clear();
@@ -122,7 +130,8 @@ public class InMemoryDB {
         }
     }
 
-    public Observation getObservationById(Long id) throws ObservationsException {
+    @Override
+    public Observation getObservation(Long id) throws ObservationsException {
         val foundObservation = observations.stream()
                 .filter(observation -> observation.who().getId().equals(id))
                 .toList();
@@ -133,7 +142,8 @@ public class InMemoryDB {
         }
     }
 
-    public Observation getObservationByName(String name) throws ObservationsException {
+    @Override
+    public Observation getObservation(String name) throws ObservationsException {
         val foundObservation = observations.stream()
                 .filter(observation -> observation.who().getName().equals(name))
                 .toList();
@@ -143,7 +153,6 @@ public class InMemoryDB {
             throw new ObservationsException("no observation with name: %s".formatted(name));
         }
     }
-
 
     private void generateObservations() {
         try {
