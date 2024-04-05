@@ -154,6 +154,7 @@ public class InMemoryDB implements Storage {
         }
     }
 
+    //TODO: fix when last participant has only themselves in list of possible observations (infinite loop)
     private void generateObservations() {
         try {
             var generatedNumbers = new ArrayList<>();
