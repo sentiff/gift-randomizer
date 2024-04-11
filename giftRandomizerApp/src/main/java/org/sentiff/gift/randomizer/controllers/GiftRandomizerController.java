@@ -1,7 +1,7 @@
 package org.sentiff.gift.randomizer.controllers;
 
 import lombok.val;
-import org.sentiff.gift.randomizer.commons.db.InMemoryDB;
+import org.sentiff.gift.randomizer.commons.db.Storage;
 import org.sentiff.gift.randomizer.commons.utils.JsonUtils;
 import org.sentiff.gift.randomizer.utils.ContentType;
 import org.sentiff.gift.randomizer.utils.ResponseUtils;
@@ -20,7 +20,7 @@ public class GiftRandomizerController {
     private ResponseUtils responseUtils;
 
     @Autowired
-    private InMemoryDB inMemoryDB;
+    private Storage inMemoryDB;
 
     @PostMapping("/createObservations")
     public ResponseEntity<String> createObservations(@RequestParam(value = "fairnessEnabled") Boolean areObservationsFair) {

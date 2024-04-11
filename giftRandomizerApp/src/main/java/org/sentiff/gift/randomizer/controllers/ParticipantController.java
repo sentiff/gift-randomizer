@@ -2,7 +2,7 @@ package org.sentiff.gift.randomizer.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.val;
-import org.sentiff.gift.randomizer.commons.db.InMemoryDB;
+import org.sentiff.gift.randomizer.commons.db.Storage;
 import org.sentiff.gift.randomizer.commons.db.model.exceptions.ParticipantException;
 import org.sentiff.gift.randomizer.commons.utils.JsonUtils;
 import org.sentiff.gift.randomizer.utils.ContentType;
@@ -24,7 +24,7 @@ public class ParticipantController {
     private ResponseUtils responseUtils;
 
     @Autowired
-    private InMemoryDB inMemoryDB;
+    private Storage inMemoryDB;
 
 
     private final String UNKNOWN_ERROR = "UNKNOWN ERROR";

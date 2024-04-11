@@ -1,7 +1,6 @@
 package org.sentiff.gift.randomizer.commons.db;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.val;
 import org.javatuples.Pair;
 import org.sentiff.gift.randomizer.commons.db.model.*;
@@ -13,11 +12,14 @@ import java.util.*;
 @AllArgsConstructor
 public class InMemoryDB implements Storage {
 
-    @Getter
     private final LinkedList<Participant> participants;
-    @Getter
     private final LinkedList<Observation> observations;
     private final Random randomGenerator;
+
+    @Override
+    public List<Participant> getParticipants() {
+        return participants;
+    }
 
     @Override
     public Participant getParticipant(Long id) throws ParticipantException {
@@ -108,6 +110,10 @@ public class InMemoryDB implements Storage {
         } catch (ParticipantException e) {
             return new Response("cannot remove, participant with id: %s not found".formatted(id), "204");
         }
+    }
+
+    public List<Observation> getObservations() {
+        return observations;
     }
 
     public Response removeObservations() throws ObservationsException {

@@ -9,6 +9,9 @@ import org.sentiff.gift.randomizer.commons.db.model.exceptions.ParticipantExcept
 import java.util.List;
 
 public interface Storage {
+
+    List<Participant> getParticipants() throws ParticipantException;
+
     Participant getParticipant(Long id) throws ParticipantException;
 
     Participant getParticipant(String name) throws ParticipantException;
@@ -22,6 +25,8 @@ public interface Storage {
     Response updateParticipant(Long id, String name, List<String> rawGiftIdeas) throws ParticipantException;
 
     Response removeParticipant(Long id) throws ParticipantException;
+
+    List<Observation> getObservations() throws ObservationsException;
 
     Response removeObservations() throws ObservationsException;
 
