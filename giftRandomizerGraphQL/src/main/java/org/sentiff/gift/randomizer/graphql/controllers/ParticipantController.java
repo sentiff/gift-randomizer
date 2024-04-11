@@ -5,9 +5,9 @@ import com.netflix.graphql.dgs.DgsMutation;
 import com.netflix.graphql.dgs.DgsQuery;
 import com.netflix.graphql.dgs.InputArgument;
 import org.sentiff.gift.randomizer.commons.db.InMemoryDB;
-import org.sentiff.gift.randomizer.commons.db.model.GiftIdea;
 import org.sentiff.gift.randomizer.commons.db.model.GiftIdeaInput;
 import org.sentiff.gift.randomizer.commons.db.model.Participant;
+import org.sentiff.gift.randomizer.commons.db.model.exceptions.ParticipantException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.LinkedHashMap;
@@ -36,24 +36,24 @@ public class ParticipantController {
     }
 
     @DgsMutation
-    public String addParticipant(@InputArgument String name, @InputArgument List<LinkedHashMap<String, String>> giftIdeas) {
+    public String addParticipant(@InputArgument String name, @InputArgument List<LinkedHashMap<String, String>> giftIdeas) throws ParticipantException {
         inMemoryDB.addParticipant(name, giftIdeas.stream().map(element -> element.get("rawText")).toList());
         return "success";
     }
 
     @DgsMutation
-    public String updateParticipantName(@InputArgument Integer id, @InputArgument String name) {
-        inMemoryDB.updateParticipantById(Long.valueOf(id), name);
+    public String updateParticipantName(@InputArgument Integer id, @InputArgument String name) throws ParticipantException {
+        inMemoryDB.updateParticipant(Long.valueOf(id), name);
         return "success";
     }
 
     @DgsMutation
-    public void updateParticipantGiftIdeas(@InputArgument Integer id, @InputArgument List<GiftIdeaInput> giftIdeas) {
-        inMemoryDB.updateParticipantById(Long.valueOf(id), giftIdeas.stream().map(GiftIdeaInput::getRawText).toList());
+    public void updateParticipantGiftIdeas(@InputArgument Integer id, @InputArgument List<GiftIdeaInput> giftIdeas) throws ParticipantException {
+        inMemoryDB.updateParticipant(Long.valueOf(id), giftIdeas.stream().map(GiftIdeaInput::getRawText).toList());
     }
 
     @DgsMutation
-    public void removeParticipant(@InputArgument Integer id) {
-        inMemoryDB.removeParticipantById(Long.valueOf(id));
+    public void removeParticipant(@InputArgument Integer id) throws ParticipantException {
+        inMemoryDB.removeParticipant(Long.valueOf(id));
     }
 }
