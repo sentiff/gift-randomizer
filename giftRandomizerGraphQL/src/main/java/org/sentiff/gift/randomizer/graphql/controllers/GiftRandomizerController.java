@@ -5,7 +5,7 @@ import com.netflix.graphql.dgs.DgsMutation;
 import com.netflix.graphql.dgs.DgsQuery;
 import com.netflix.graphql.dgs.InputArgument;
 import lombok.val;
-import org.sentiff.gift.randomizer.commons.db.InMemoryDB;
+import org.sentiff.gift.randomizer.commons.db.Storage;
 import org.sentiff.gift.randomizer.commons.db.model.Observation;
 import org.sentiff.gift.randomizer.commons.db.model.exceptions.ObservationsException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +15,10 @@ import java.util.List;
 @DgsComponent
 public class GiftRandomizerController {
     @Autowired
-    private InMemoryDB inMemoryDB;
+    private Storage inMemoryDB;
 
     @DgsQuery
-    public List<Observation> observations() {
+    public List<Observation> observations() throws ObservationsException {
         return inMemoryDB.getObservations();
     }
 

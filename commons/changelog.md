@@ -5,6 +5,12 @@
  \___\___/|_| |_| |_|_| |_| |_|\___/|_| |_|___/
 ```
 
+## 1.0.1
+
+1. added missing _getParticipants_ and _getObservations_ methods to **Storage** interface
+2. removed unused _getters_ from **InMemoryDB**
+3. added changelog
+
 ## 1.0.0
 
 1. added **Storage** interface

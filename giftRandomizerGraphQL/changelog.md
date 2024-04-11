@@ -9,6 +9,10 @@
  |___/                                                                                |_|                      
 ```
 
+## 0.0.2
+
+1. changed to use **Storage** interface in place of **InMemoryDB**
+
 ## 0.0.1-SNAPSHOT
 
 1. initial release
