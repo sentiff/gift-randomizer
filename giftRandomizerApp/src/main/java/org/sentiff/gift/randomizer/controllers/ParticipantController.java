@@ -2,10 +2,10 @@ package org.sentiff.gift.randomizer.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.val;
-import org.sentiff.gift.randomizer.commons.db.InMemoryDB;
+import org.sentiff.gift.randomizer.commons.db.Storage;
 import org.sentiff.gift.randomizer.commons.db.model.exceptions.ParticipantException;
+import org.sentiff.gift.randomizer.commons.utils.JsonUtils;
 import org.sentiff.gift.randomizer.utils.ContentType;
-import org.sentiff.gift.randomizer.commons.db.utils.JsonUtils;
 import org.sentiff.gift.randomizer.utils.ResponseUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,7 +24,7 @@ public class ParticipantController {
     private ResponseUtils responseUtils;
 
     @Autowired
-    private InMemoryDB inMemoryDB;
+    private Storage inMemoryDB;
 
 
     private final String UNKNOWN_ERROR = "UNKNOWN ERROR";
@@ -57,7 +57,7 @@ public class ParticipantController {
     @GetMapping("/getParticipantByName")
     public ResponseEntity<String> getParticipantByName(@RequestParam(value = "name") String name) {
         try {
-            val person = inMemoryDB.getParticipantByName(name);
+            val person = inMemoryDB.getParticipant(name);
             return responseUtils.createResponse(
                     jsonUtils.toJson(person),
                     ContentType.APPLICATION_JSON.value,
@@ -81,7 +81,7 @@ public class ParticipantController {
     @GetMapping("/getParticipantById")
     public ResponseEntity<String> getParticipantById(@RequestParam(value = "id", defaultValue = "1") Long id) {
         try {
-            val person = inMemoryDB.getParticipantById(id);
+            val person = inMemoryDB.getParticipant(id);
             return responseUtils.createResponse(
                     jsonUtils.toJson(person),
                     ContentType.APPLICATION_JSON.value,
@@ -123,7 +123,7 @@ public class ParticipantController {
     @PostMapping("/updateParticipantById")
     public ResponseEntity<String> updateParticipantById(@RequestParam(value = "id") Long id, @RequestParam(value = "name") String name, @RequestParam(value = "gift ideas") List<String> rawGiftIdeas) {
         try {
-            val dbResponse = inMemoryDB.updateParticipantById(id, name, rawGiftIdeas);
+            val dbResponse = inMemoryDB.updateParticipant(id, name, rawGiftIdeas);
             return responseUtils.createResponse(
                     jsonUtils.toJson(dbResponse),
                     ContentType.APPLICATION_JSON.value,
@@ -141,7 +141,7 @@ public class ParticipantController {
     @PostMapping("/updateParticipantNameById")
     public ResponseEntity<String> updateParticipantById(@RequestParam(value = "id") Long id, @RequestParam(value = "name") String name) {
         try {
-            val dbResponse = inMemoryDB.updateParticipantById(id, name);
+            val dbResponse = inMemoryDB.updateParticipant(id, name);
             return responseUtils.createResponse(
                     jsonUtils.toJson(dbResponse),
                     ContentType.APPLICATION_JSON.value,
@@ -159,7 +159,7 @@ public class ParticipantController {
     @PostMapping("/updateParticipantGiftIdeasById")
     public ResponseEntity<String> updateParticipantById(@RequestParam(value = "id") Long id, @RequestParam(value = "gift ideas") List<String> rawGiftIdeas) {
         try {
-            val dbResponse = inMemoryDB.updateParticipantById(id, rawGiftIdeas);
+            val dbResponse = inMemoryDB.updateParticipant(id, rawGiftIdeas);
             return responseUtils.createResponse(
                     jsonUtils.toJson(dbResponse),
                     ContentType.APPLICATION_JSON.value,
@@ -177,7 +177,7 @@ public class ParticipantController {
     @DeleteMapping("/removeParticipantById")
     public ResponseEntity<String> removeParticipantById(@RequestParam(value = "id") Long id) {
         try {
-            val dbResponse = inMemoryDB.removeParticipantById(id);
+            val dbResponse = inMemoryDB.removeParticipant(id);
             return responseUtils.createResponse(
                     jsonUtils.toJson(dbResponse),
                     ContentType.APPLICATION_JSON.value,

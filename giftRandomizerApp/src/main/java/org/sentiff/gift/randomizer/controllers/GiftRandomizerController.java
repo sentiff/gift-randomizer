@@ -1,9 +1,9 @@
 package org.sentiff.gift.randomizer.controllers;
 
 import lombok.val;
-import org.sentiff.gift.randomizer.commons.db.InMemoryDB;
+import org.sentiff.gift.randomizer.commons.db.Storage;
+import org.sentiff.gift.randomizer.commons.utils.JsonUtils;
 import org.sentiff.gift.randomizer.utils.ContentType;
-import org.sentiff.gift.randomizer.commons.db.utils.JsonUtils;
 import org.sentiff.gift.randomizer.utils.ResponseUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +20,7 @@ public class GiftRandomizerController {
     private ResponseUtils responseUtils;
 
     @Autowired
-    private InMemoryDB inMemoryDB;
+    private Storage inMemoryDB;
 
     @PostMapping("/createObservations")
     public ResponseEntity<String> createObservations(@RequestParam(value = "fairnessEnabled") Boolean areObservationsFair) {
@@ -97,7 +97,7 @@ public class GiftRandomizerController {
     @GetMapping("/getObservationById")
     public ResponseEntity<String> getObservationById(@RequestParam(value = "id", defaultValue = "1") Long id) {
         try {
-            val response = inMemoryDB.getObservationById(id);
+            val response = inMemoryDB.getObservation(id);
             return responseUtils.createResponse(
                     jsonUtils.toJson(response),
                     ContentType.APPLICATION_JSON.value,
@@ -115,7 +115,7 @@ public class GiftRandomizerController {
     @GetMapping("/getObservationByName")
     public ResponseEntity<String> getObservationByName(@RequestParam(value = "Name") String name) {
         try {
-            val response = inMemoryDB.getObservationByName(name);
+            val response = inMemoryDB.getObservation(name);
             return responseUtils.createResponse(
                     jsonUtils.toJson(response),
                     ContentType.APPLICATION_JSON.value,

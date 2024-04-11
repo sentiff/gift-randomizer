@@ -24,12 +24,12 @@ public class GiftRandomizerController {
 
     @DgsQuery
     public Observation observationById(@InputArgument Integer id) throws ObservationsException {
-        return inMemoryDB.getObservationById(Long.valueOf(id));
+        return inMemoryDB.getObservation(Long.valueOf(id));
     }
 
     @DgsQuery
     public Observation observationByName(@InputArgument String name) throws ObservationsException {
-        return inMemoryDB.getObservationByName(name);
+        return inMemoryDB.getObservation(name);
     }
 
     @DgsMutation

@@ -6,7 +6,7 @@ import org.sentiff.gift.randomizer.commons.db.InMemoryDB;
 import org.sentiff.gift.randomizer.commons.db.model.GiftIdea;
 import org.sentiff.gift.randomizer.commons.db.model.Observation;
 import org.sentiff.gift.randomizer.commons.db.model.Participant;
-import org.sentiff.gift.randomizer.commons.db.utils.JsonUtils;
+import org.sentiff.gift.randomizer.commons.utils.JsonUtils;
 import org.sentiff.gift.randomizer.utils.ResponseUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,7 +23,7 @@ public class BeanProvider {
         return new OpenAPI()
                 .info(new Info()
                         .title("gift randomizer API")
-                        .version("0.0.1-SNAPSHOT"));
+                        .version("0.0.3"));
     }
 
     @Bean
