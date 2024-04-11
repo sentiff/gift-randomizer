@@ -23,7 +23,7 @@ public class BeanProvider {
         return new OpenAPI()
                 .info(new Info()
                         .title("gift randomizer API")
-                        .version("0.0.1-SNAPSHOT"));
+                        .version("0.0.3"));
     }
 
     @Bean
