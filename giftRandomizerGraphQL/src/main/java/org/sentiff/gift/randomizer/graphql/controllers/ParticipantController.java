@@ -4,7 +4,7 @@ import com.netflix.graphql.dgs.DgsComponent;
 import com.netflix.graphql.dgs.DgsMutation;
 import com.netflix.graphql.dgs.DgsQuery;
 import com.netflix.graphql.dgs.InputArgument;
-import org.sentiff.gift.randomizer.commons.db.InMemoryDB;
+import org.sentiff.gift.randomizer.commons.db.Storage;
 import org.sentiff.gift.randomizer.commons.db.model.GiftIdeaInput;
 import org.sentiff.gift.randomizer.commons.db.model.Participant;
 import org.sentiff.gift.randomizer.commons.db.model.exceptions.ParticipantException;
@@ -17,10 +17,10 @@ import java.util.List;
 public class ParticipantController {
 
     @Autowired
-    private InMemoryDB inMemoryDB;
+    private Storage inMemoryDB;
 
     @DgsQuery
-    public List<Participant> participantByName(@InputArgument String name) {
+    public List<Participant> participantByName(@InputArgument String name) throws ParticipantException {
         if (name == null) {
             return inMemoryDB.getParticipants();
         }
@@ -28,7 +28,7 @@ public class ParticipantController {
     }
 
     @DgsQuery
-    public List<Participant> participantById(@InputArgument Integer id) {
+    public List<Participant> participantById(@InputArgument Integer id) throws ParticipantException {
         if (id == null) {
             return inMemoryDB.getParticipants();
         }

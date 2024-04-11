@@ -3,6 +3,7 @@ package org.sentiff.gift.randomizer.graphql;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import org.sentiff.gift.randomizer.commons.db.InMemoryDB;
+import org.sentiff.gift.randomizer.commons.db.Storage;
 import org.sentiff.gift.randomizer.commons.db.model.GiftIdea;
 import org.sentiff.gift.randomizer.commons.db.model.Observation;
 import org.sentiff.gift.randomizer.commons.db.model.Participant;
@@ -31,7 +32,7 @@ public class BeanProvider {
     }
 
     @Bean
-    public InMemoryDB getInMemoryDB() {
+    public Storage getInMemoryDB() {
         final LinkedList<Participant> participants = new LinkedList<>();
         participants.add(new Participant(1L, "Janusz", List.of(new GiftIdea("passerati"))));
         participants.add(new Participant(2L, "Grażynka", List.of(new GiftIdea("djament"))));
