@@ -3,6 +3,7 @@ package org.sentiff.gift.randomizer.commons.db;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.val;
+import org.javatuples.Pair;
 import org.sentiff.gift.randomizer.commons.db.model.*;
 import org.sentiff.gift.randomizer.commons.db.model.exceptions.ObservationsException;
 import org.sentiff.gift.randomizer.commons.db.model.exceptions.ParticipantException;
@@ -154,28 +155,57 @@ public class InMemoryDB implements Storage {
         }
     }
 
-    //TODO: fix when last participant has only themselves in list of possible observations (infinite loop)
-    private void generateObservations() {
+    private void generateObservations() throws ObservationsException {
         try {
-            var generatedNumbers = new ArrayList<>();
-            participants.forEach(
-                    participant -> {
-                        do {
-                            val generatedNumber = randomGenerator.nextInt(participants.size());
-                            if (!generatedNumbers.contains(generatedNumber) && !participants.get(generatedNumber).equals(participant)) {
-                                generatedNumbers.add(generatedNumber);
-                                observations.add(
-                                        new Observation(
-                                                new Person(participant.getId(), participant.getName()),
-                                                participants.get(generatedNumber)
-                                        )
-                                );
-                                break;
-                            }
-                        } while (true);
-                    });
+            ArrayList<Pair<Long, Long>> pairs;
+            do {
+                pairs = generatePairs();
+            } while (!arePairsUnique(pairs));
+            convertPairsToObservations(pairs);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new ObservationsException(e.getMessage());
         }
+    }
+
+    private Boolean arePairsUnique(ArrayList<Pair<Long, Long>> pairs) {
+        return pairs.stream()
+                .filter(pair -> pair.getValue0().equals(pair.getValue1()))
+                .toList()
+                .isEmpty();
+    }
+
+    private ArrayList<Pair<Long, Long>> generatePairs() {
+        val generatedNumbers = new ArrayList<Long>();
+        val pairs = new ArrayList<Pair<Long, Long>>();
+        participants.forEach(
+                participant -> {
+                    do {
+                        val generatedNumber = randomGenerator.nextLong(1, participants.getLast().getId() + 1);
+                        if (!generatedNumbers.contains(generatedNumber)) {
+                            generatedNumbers.add(generatedNumber);
+                            pairs.add(new Pair<>(participant.getId(), generatedNumber));
+                            break;
+                        }
+                    } while (true);
+                });
+        return pairs;
+    }
+
+    private void convertPairsToObservations(ArrayList<Pair<Long, Long>> pairs) {
+        pairs.forEach(pair ->
+                {
+                    try {
+                        val who = getParticipant(pair.getValue0());
+                        val toWhom = getParticipant(pair.getValue1());
+                        observations.add(
+                                new Observation(
+                                        new Person(who.getId(), who.getName()),
+                                        getParticipant(toWhom.getId())
+                                ));
+                    } catch (Exception e) {
+                        throw new RuntimeException(e.getMessage());
+                    }
+                }
+        );
     }
 }
