@@ -24,7 +24,7 @@ public class BeanProvider {
         return new OpenAPI()
                 .info(new Info()
                         .title("gift randomizer API")
-                        .version("0.0.3"));
+                        .version("0.0.4"));
     }
 
     @Bean
