@@ -9,6 +9,10 @@
  |___/                                                                                |_|                      
 ```
 
+## 0.1.0
+
+1. updated to use new memoryDB module
+
 ## 0.0.2
 
 1. changed to use **Storage** interface in place of **InMemoryDB**
