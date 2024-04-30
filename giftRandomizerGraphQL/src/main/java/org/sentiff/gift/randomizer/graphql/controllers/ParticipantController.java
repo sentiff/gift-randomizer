@@ -4,10 +4,10 @@ import com.netflix.graphql.dgs.DgsComponent;
 import com.netflix.graphql.dgs.DgsMutation;
 import com.netflix.graphql.dgs.DgsQuery;
 import com.netflix.graphql.dgs.InputArgument;
-import org.sentiff.gift.randomizer.commons.db.Storage;
-import org.sentiff.gift.randomizer.commons.db.model.GiftIdeaInput;
-import org.sentiff.gift.randomizer.commons.db.model.Participant;
-import org.sentiff.gift.randomizer.commons.db.model.exceptions.ParticipantException;
+import org.sentiff.gift.randomizer.commons.Storage;
+import org.sentiff.gift.randomizer.commons.model.GiftIdeaInput;
+import org.sentiff.gift.randomizer.commons.model.Participant;
+import org.sentiff.gift.randomizer.commons.model.exceptions.ParticipantException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.LinkedHashMap;
