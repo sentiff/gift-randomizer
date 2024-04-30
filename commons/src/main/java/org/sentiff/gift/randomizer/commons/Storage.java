@@ -1,10 +1,10 @@
-package org.sentiff.gift.randomizer.commons.db;
+package org.sentiff.gift.randomizer.commons;
 
-import org.sentiff.gift.randomizer.commons.db.model.Observation;
-import org.sentiff.gift.randomizer.commons.db.model.Participant;
-import org.sentiff.gift.randomizer.commons.db.model.Response;
-import org.sentiff.gift.randomizer.commons.db.model.exceptions.ObservationsException;
-import org.sentiff.gift.randomizer.commons.db.model.exceptions.ParticipantException;
+import org.sentiff.gift.randomizer.commons.model.Observation;
+import org.sentiff.gift.randomizer.commons.model.Participant;
+import org.sentiff.gift.randomizer.commons.model.Response;
+import org.sentiff.gift.randomizer.commons.model.exceptions.ObservationsException;
+import org.sentiff.gift.randomizer.commons.model.exceptions.ParticipantException;
 
 import java.util.List;
 
