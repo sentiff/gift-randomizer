@@ -23,7 +23,7 @@ public class BeanProvider {
         return new OpenAPI()
                 .info(new Info()
                         .title("gift randomizer graphQL")
-                        .version("0.0.2"));
+                        .version("0.1.0"));
     }
 
     @Bean
