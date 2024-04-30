@@ -1,9 +1,10 @@
 import lombok.val;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.sentiff.gift.randomizer.commons.db.InMemoryDB;
-import org.sentiff.gift.randomizer.commons.db.model.*;
-import org.sentiff.gift.randomizer.commons.db.model.exceptions.ObservationsException;
-import org.sentiff.gift.randomizer.commons.db.model.exceptions.ParticipantException;
+import org.sentiff.gift.randomizer.commons.model.*;
+import org.sentiff.gift.randomizer.commons.model.exceptions.ObservationsException;
+import org.sentiff.gift.randomizer.commons.model.exceptions.ParticipantException;
+import org.sentiff.gift.randomizer.memorydb.MemoryDB;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.Random;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-class InMemoryDBTest {
+class MemoryDBTest {
 
     private final Participant JANUSZ = new Participant(1L, "Janusz", List.of(new GiftIdea("passerati")));
     private final Participant GRAZYNKA = new Participant(2L, "Grażynka", List.of(new GiftIdea("djament")));
@@ -46,7 +47,7 @@ class InMemoryDBTest {
         return observations;
     }
 
-    private InMemoryDB createInMemoryDB(Boolean areParticipants, Boolean areObservations) {
+    private MemoryDB createInMemoryDB(Boolean areParticipants, Boolean areObservations) {
         var participants = new LinkedList<Participant>();
         var observations = new LinkedList<Observation>();
         val randomGenerator = new Random();
@@ -58,7 +59,7 @@ class InMemoryDBTest {
             observations = OBSERVATIONS;
         }
 
-        return new InMemoryDB(participants, observations, randomGenerator);
+        return new MemoryDB(participants, observations, randomGenerator);
     }
 
     @Test
@@ -77,11 +78,11 @@ class InMemoryDBTest {
         assertEquals(expectedParticipant.getGiftIdeas().get(0).rawText(), actualParticipant.getGiftIdeas().get(0).rawText());
 
         var expectedException = new ParticipantException("no participant with name: Andrzej");
-        var actualException = assertThrows(ParticipantException.class, () -> tempDB.getParticipant("Andrzej"));
+        var actualException = Assertions.assertThrows(ParticipantException.class, () -> tempDB.getParticipant("Andrzej"));
         assertEquals(expectedException.getMessage(), actualException.getMessage());
 
         expectedException = new ParticipantException("no participant with id: 100");
-        actualException = assertThrows(ParticipantException.class, () -> tempDB.getParticipant(100L));
+        actualException = Assertions.assertThrows(ParticipantException.class, () -> tempDB.getParticipant(100L));
         assertEquals(expectedException.getMessage(), actualException.getMessage());
     }
 
@@ -121,15 +122,15 @@ class InMemoryDBTest {
 
         expectedParticipant = new Participant(1L, "Mariusz", List.of(new GiftIdea("passerati")));
         actualParticipant = tempDB.getParticipant(1L);
-        assertEquals(expectedParticipant.getName(),actualParticipant.getName());
-        assertEquals(expectedParticipant.getId(),actualParticipant.getId());
+        assertEquals(expectedParticipant.getName(), actualParticipant.getName());
+        assertEquals(expectedParticipant.getId(), actualParticipant.getId());
 
-        tempDB.updateParticipant(1L,List.of("ponton"));
+        tempDB.updateParticipant(1L, List.of("ponton"));
 
-        expectedParticipant = new Participant(1L, "Janusz",List.of(new GiftIdea("ponton")));
+        expectedParticipant = new Participant(1L, "Janusz", List.of(new GiftIdea("ponton")));
         actualParticipant = tempDB.getParticipant(1L);
-        assertEquals(expectedParticipant.getId(),actualParticipant.getId());
-        assertEquals(expectedParticipant.getGiftIdeas(),actualParticipant.getGiftIdeas());
+        assertEquals(expectedParticipant.getId(), actualParticipant.getId());
+        assertEquals(expectedParticipant.getGiftIdeas(), actualParticipant.getGiftIdeas());
     }
 
     @Test
@@ -137,7 +138,7 @@ class InMemoryDBTest {
         var tempDB = createInMemoryDB(true, true);
 
         val actualObservations = tempDB.getObservations();
-        assertEquals(OBSERVATIONS, actualObservations);
+        Assertions.assertEquals(OBSERVATIONS, actualObservations);
 
 
         var expectedObservation = OBSERVATIONS.get(0);
@@ -160,7 +161,7 @@ class InMemoryDBTest {
         tempDB = createInMemoryDB(true, false);
 
         var expectedException = new ObservationsException("no observations to remove");
-        var actualException = assertThrows(ObservationsException.class, tempDB::removeObservations);
+        var actualException = Assertions.assertThrows(ObservationsException.class, tempDB::removeObservations);
         assertEquals(expectedException.getMessage(), actualException.getMessage());
     }
 
@@ -177,7 +178,7 @@ class InMemoryDBTest {
         assertEquals(expectedResponse.body(), actualResponse.body());
 
         val expectedException = new ObservationsException("observations already generated");
-        val actualException = assertThrows(ObservationsException.class, () -> tempDB.createObservations(false));
+        val actualException = Assertions.assertThrows(ObservationsException.class, () -> tempDB.createObservations(false));
         assertEquals(expectedException.getMessage(), actualException.getMessage());
     }
 }
