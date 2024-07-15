@@ -1,16 +1,21 @@
-package org.sentiff.gift.randomizer.commons.db;
+package org.sentiff.gift.randomizer.memorydb;
 
 import lombok.AllArgsConstructor;
 import lombok.val;
 import org.javatuples.Pair;
-import org.sentiff.gift.randomizer.commons.db.model.*;
-import org.sentiff.gift.randomizer.commons.db.model.exceptions.ObservationsException;
-import org.sentiff.gift.randomizer.commons.db.model.exceptions.ParticipantException;
+import org.sentiff.gift.randomizer.commons.Storage;
+import org.sentiff.gift.randomizer.commons.model.Observation;
+import org.sentiff.gift.randomizer.commons.model.GiftIdea;
+import org.sentiff.gift.randomizer.commons.model.Participant;
+import org.sentiff.gift.randomizer.commons.model.Person;
+import org.sentiff.gift.randomizer.commons.model.Response;
+import org.sentiff.gift.randomizer.commons.model.exceptions.ObservationsException;
+import org.sentiff.gift.randomizer.commons.model.exceptions.ParticipantException;
 
 import java.util.*;
 
 @AllArgsConstructor
-public class InMemoryDB implements Storage {
+public class MemoryDB implements Storage {
 
     private final LinkedList<Participant> participants;
     private final LinkedList<Observation> observations;

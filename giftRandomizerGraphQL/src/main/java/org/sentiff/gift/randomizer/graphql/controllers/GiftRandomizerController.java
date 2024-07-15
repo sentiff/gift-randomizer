@@ -5,9 +5,9 @@ import com.netflix.graphql.dgs.DgsMutation;
 import com.netflix.graphql.dgs.DgsQuery;
 import com.netflix.graphql.dgs.InputArgument;
 import lombok.val;
-import org.sentiff.gift.randomizer.commons.db.Storage;
-import org.sentiff.gift.randomizer.commons.db.model.Observation;
-import org.sentiff.gift.randomizer.commons.db.model.exceptions.ObservationsException;
+import org.sentiff.gift.randomizer.commons.Storage;
+import org.sentiff.gift.randomizer.commons.model.Observation;
+import org.sentiff.gift.randomizer.commons.model.exceptions.ObservationsException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;

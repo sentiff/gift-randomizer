@@ -5,6 +5,12 @@
  \___\___/|_| |_| |_|_| |_| |_|\___/|_| |_|___/
 ```
 
+## 2.0.0
+
+1. moved **inMemoryDB** and **inMemoryDBTest** to separate module
+2. moved **Storage** interface to module root
+3. removed db part from model path
+
 ## 1.0.1
 
 1. added missing _getParticipants_ and _getObservations_ methods to **Storage** interface

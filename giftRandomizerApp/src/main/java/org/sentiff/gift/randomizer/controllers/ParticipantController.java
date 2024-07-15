@@ -2,8 +2,8 @@ package org.sentiff.gift.randomizer.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.val;
-import org.sentiff.gift.randomizer.commons.db.Storage;
-import org.sentiff.gift.randomizer.commons.db.model.exceptions.ParticipantException;
+import org.sentiff.gift.randomizer.commons.Storage;
+import org.sentiff.gift.randomizer.commons.model.exceptions.ParticipantException;
 import org.sentiff.gift.randomizer.commons.utils.JsonUtils;
 import org.sentiff.gift.randomizer.utils.ContentType;
 import org.sentiff.gift.randomizer.utils.ResponseUtils;
@@ -24,7 +24,7 @@ public class ParticipantController {
     private ResponseUtils responseUtils;
 
     @Autowired
-    private Storage inMemoryDB;
+    private Storage memoryDB;
 
 
     private final String UNKNOWN_ERROR = "UNKNOWN ERROR";
@@ -33,7 +33,7 @@ public class ParticipantController {
     @GetMapping("/getParticipants")
     public ResponseEntity<String> getParticipants() {
         try {
-            val person = inMemoryDB.getParticipants();
+            val person = memoryDB.getParticipants();
             return responseUtils.createResponse(
                     jsonUtils.toJson(person),
                     ContentType.APPLICATION_JSON.value,
@@ -57,7 +57,7 @@ public class ParticipantController {
     @GetMapping("/getParticipantByName")
     public ResponseEntity<String> getParticipantByName(@RequestParam(value = "name") String name) {
         try {
-            val person = inMemoryDB.getParticipant(name);
+            val person = memoryDB.getParticipant(name);
             return responseUtils.createResponse(
                     jsonUtils.toJson(person),
                     ContentType.APPLICATION_JSON.value,
@@ -81,7 +81,7 @@ public class ParticipantController {
     @GetMapping("/getParticipantById")
     public ResponseEntity<String> getParticipantById(@RequestParam(value = "id", defaultValue = "1") Long id) {
         try {
-            val person = inMemoryDB.getParticipant(id);
+            val person = memoryDB.getParticipant(id);
             return responseUtils.createResponse(
                     jsonUtils.toJson(person),
                     ContentType.APPLICATION_JSON.value,
@@ -105,7 +105,7 @@ public class ParticipantController {
     @PostMapping("/addParticipant")
     public ResponseEntity<String> addParticipant(@RequestParam(value = "name") String name, @RequestParam(value = "giftIdeas") List<String> giftIdeas) {
         try {
-            val dbResponse = inMemoryDB.addParticipant(name, giftIdeas);
+            val dbResponse = memoryDB.addParticipant(name, giftIdeas);
             return responseUtils.createResponse(
                     jsonUtils.toJson(dbResponse),
                     ContentType.APPLICATION_JSON.value,
@@ -123,7 +123,7 @@ public class ParticipantController {
     @PostMapping("/updateParticipantById")
     public ResponseEntity<String> updateParticipantById(@RequestParam(value = "id") Long id, @RequestParam(value = "name") String name, @RequestParam(value = "gift ideas") List<String> rawGiftIdeas) {
         try {
-            val dbResponse = inMemoryDB.updateParticipant(id, name, rawGiftIdeas);
+            val dbResponse = memoryDB.updateParticipant(id, name, rawGiftIdeas);
             return responseUtils.createResponse(
                     jsonUtils.toJson(dbResponse),
                     ContentType.APPLICATION_JSON.value,
@@ -141,7 +141,7 @@ public class ParticipantController {
     @PostMapping("/updateParticipantNameById")
     public ResponseEntity<String> updateParticipantById(@RequestParam(value = "id") Long id, @RequestParam(value = "name") String name) {
         try {
-            val dbResponse = inMemoryDB.updateParticipant(id, name);
+            val dbResponse = memoryDB.updateParticipant(id, name);
             return responseUtils.createResponse(
                     jsonUtils.toJson(dbResponse),
                     ContentType.APPLICATION_JSON.value,
@@ -159,7 +159,7 @@ public class ParticipantController {
     @PostMapping("/updateParticipantGiftIdeasById")
     public ResponseEntity<String> updateParticipantById(@RequestParam(value = "id") Long id, @RequestParam(value = "gift ideas") List<String> rawGiftIdeas) {
         try {
-            val dbResponse = inMemoryDB.updateParticipant(id, rawGiftIdeas);
+            val dbResponse = memoryDB.updateParticipant(id, rawGiftIdeas);
             return responseUtils.createResponse(
                     jsonUtils.toJson(dbResponse),
                     ContentType.APPLICATION_JSON.value,
@@ -177,7 +177,7 @@ public class ParticipantController {
     @DeleteMapping("/removeParticipantById")
     public ResponseEntity<String> removeParticipantById(@RequestParam(value = "id") Long id) {
         try {
-            val dbResponse = inMemoryDB.removeParticipant(id);
+            val dbResponse = memoryDB.removeParticipant(id);
             return responseUtils.createResponse(
                     jsonUtils.toJson(dbResponse),
                     ContentType.APPLICATION_JSON.value,

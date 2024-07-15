@@ -9,9 +9,18 @@
  |___/                                                                                |_|                      
 ```
 
+## 0.1.0
+
+1. changed to use new **memoryDB** module in place of commons **InMemoryDB**
+2. added missing separators in changelog
+
+---
+
 ## 0.0.2
 
 1. changed to use **Storage** interface in place of **InMemoryDB**
+
+---
 
 ## 0.0.1-SNAPSHOT
 
