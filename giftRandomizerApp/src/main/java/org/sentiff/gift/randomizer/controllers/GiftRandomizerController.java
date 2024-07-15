@@ -20,12 +20,12 @@ public class GiftRandomizerController {
     private ResponseUtils responseUtils;
 
     @Autowired
-    private Storage inMemoryDB;
+    private Storage memoryDB;
 
     @PostMapping("/createObservations")
     public ResponseEntity<String> createObservations(@RequestParam(value = "fairnessEnabled") Boolean areObservationsFair) {
         try {
-            val response = inMemoryDB.createObservations(false);
+            val response = memoryDB.createObservations(false);
             return responseUtils.createResponse(
                     jsonUtils.toJson(response),
                     ContentType.APPLICATION_JSON.value,
@@ -43,7 +43,7 @@ public class GiftRandomizerController {
     @PostMapping("/recreateObservations")
     public ResponseEntity<String> recreateObservations() {
         try {
-            val response = inMemoryDB.createObservations(true);
+            val response = memoryDB.createObservations(true);
             return responseUtils.createResponse(
                     jsonUtils.toJson(response),
                     ContentType.APPLICATION_JSON.value,
@@ -61,7 +61,7 @@ public class GiftRandomizerController {
     @GetMapping("/getObservations")
     public ResponseEntity<String> getObservations() {
         try {
-            val observations = inMemoryDB.getObservations();
+            val observations = memoryDB.getObservations();
             return responseUtils.createResponse(
                     jsonUtils.toJson(observations),
                     ContentType.APPLICATION_JSON.value,
@@ -79,7 +79,7 @@ public class GiftRandomizerController {
     @DeleteMapping("/removeObservations")
     public ResponseEntity<String> removeObservations() {
         try {
-            val response = inMemoryDB.removeObservations();
+            val response = memoryDB.removeObservations();
             return responseUtils.createResponse(
                     jsonUtils.toJson(response),
                     ContentType.APPLICATION_JSON.value,
@@ -97,7 +97,7 @@ public class GiftRandomizerController {
     @GetMapping("/getObservationById")
     public ResponseEntity<String> getObservationById(@RequestParam(value = "id", defaultValue = "1") Long id) {
         try {
-            val response = inMemoryDB.getObservation(id);
+            val response = memoryDB.getObservation(id);
             return responseUtils.createResponse(
                     jsonUtils.toJson(response),
                     ContentType.APPLICATION_JSON.value,
@@ -115,7 +115,7 @@ public class GiftRandomizerController {
     @GetMapping("/getObservationByName")
     public ResponseEntity<String> getObservationByName(@RequestParam(value = "Name") String name) {
         try {
-            val response = inMemoryDB.getObservation(name);
+            val response = memoryDB.getObservation(name);
             return responseUtils.createResponse(
                     jsonUtils.toJson(response),
                     ContentType.APPLICATION_JSON.value,
