@@ -171,18 +171,19 @@ public class MemoryDB implements Storage {
             ArrayList<Pair<Long, Long>> pairs;
             do {
                 pairs = generatePairs();
-            } while (!arePairsUnique(pairs));
+            } while (doesContainDuplicates(pairs));
             convertPairsToObservations(pairs);
         } catch (Exception e) {
             throw new ObservationsException(e.getMessage());
         }
     }
 
-    private Boolean arePairsUnique(ArrayList<Pair<Long, Long>> pairs) {
-        return pairs.stream()
+    private Boolean doesContainDuplicates(ArrayList<Pair<Long, Long>> pairs) {
+        val hasDuplicates = pairs.stream()
                 .filter(pair -> pair.getValue0().equals(pair.getValue1()))
                 .toList()
                 .isEmpty();
+        return !hasDuplicates;
     }
 
     private ArrayList<Pair<Long, Long>> generatePairs() {
