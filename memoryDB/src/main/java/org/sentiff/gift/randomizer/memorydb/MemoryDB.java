@@ -171,7 +171,7 @@ public class MemoryDB implements Storage {
             ArrayList<Pair<Long, Long>> pairs;
             do {
                 pairs = generatePairs();
-            } while (!doesContainDuplicates(pairs));
+            } while (doesContainDuplicates(pairs));
             convertPairsToObservations(pairs);
         } catch (Exception e) {
             throw new ObservationsException(e.getMessage());
