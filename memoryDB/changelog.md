@@ -9,6 +9,13 @@
                                      |___/                              
 ```
 
+## 1.0.1
+
+1. renamed **arePairsUnique** into **doesContainDuplicates**, reversed logic to return true if there are same person
+   pairs
+
+---
+
 ## 1.0.0
 
 1. moved from commons to separate module
