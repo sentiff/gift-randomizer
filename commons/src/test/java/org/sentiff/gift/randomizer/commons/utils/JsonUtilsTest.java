@@ -1,11 +1,10 @@
-package org.sentiff.gift.randomizer.commons;
+package org.sentiff.gift.randomizer.commons.utils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.val;
 import org.junit.jupiter.api.Test;
-import org.sentiff.gift.randomizer.commons.utils.JsonUtils;
 
 class JsonUtilsTest {
 
