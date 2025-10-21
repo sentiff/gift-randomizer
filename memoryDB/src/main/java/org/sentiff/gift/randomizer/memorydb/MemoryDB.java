@@ -3,7 +3,7 @@ package org.sentiff.gift.randomizer.memorydb;
 import lombok.AllArgsConstructor;
 import lombok.val;
 import org.javatuples.Pair;
-import org.sentiff.gift.randomizer.commons.Storage;
+import org.sentiff.gift.randomizer.commons.storage.Storage;
 import org.sentiff.gift.randomizer.commons.model.Observation;
 import org.sentiff.gift.randomizer.commons.model.GiftIdea;
 import org.sentiff.gift.randomizer.commons.model.Participant;
