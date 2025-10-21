@@ -3,8 +3,8 @@ package org.sentiff.gift.randomizer.controllers;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.AllArgsConstructor;
 import lombok.val;
-import org.sentiff.gift.randomizer.commons.Storage;
 import org.sentiff.gift.randomizer.commons.model.exceptions.ParticipantException;
+import org.sentiff.gift.randomizer.commons.storage.Storage;
 import org.sentiff.gift.randomizer.commons.utils.JsonUtils;
 import org.sentiff.gift.randomizer.utils.ContentType;
 import org.sentiff.gift.randomizer.utils.ResponseUtils;
@@ -22,9 +22,7 @@ public class ParticipantController {
     private ResponseUtils responseUtils;
     private Storage memoryDB;
 
-
     private static final String UNKNOWN_ERROR = "UNKNOWN ERROR";
-
 
     @GetMapping("/getParticipants")
     public ResponseEntity<String> getParticipants() {
