@@ -8,6 +8,10 @@
                                       __/ |            
                                      |___/                              
 ```
+## 1.1.0
+
+1. upgraded commons dependency from **2.0.0** to **3.0.0**
+2. fixed import paths for **Storage** interface
 
 ## 1.0.1
 
