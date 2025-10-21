@@ -38,7 +38,7 @@ public class BeanProvider {
     }
 
     @Bean
-    public Storage getInMemoryDB() {
+    public Storage getMemoryDB() {
         final LinkedList<Participant> participants = new LinkedList<>();
         participants.add(new Participant(1L, "Janusz", List.of(new GiftIdea("passerati"))));
         participants.add(new Participant(2L, "Grażynka", List.of(new GiftIdea("djament"))));
