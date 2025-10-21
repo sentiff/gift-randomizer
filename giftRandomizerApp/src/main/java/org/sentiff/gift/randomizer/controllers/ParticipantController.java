@@ -116,7 +116,7 @@ public class ParticipantController {
         }
     }
 
-    @PostMapping("/updateParticipantById")
+    @PutMapping("/updateParticipantById")
     public ResponseEntity<String> updateParticipantById(@RequestParam(value = "id") Long id, @RequestParam(value = "name") String name, @RequestParam(value = "gift ideas") List<String> rawGiftIdeas) {
         try {
             val dbResponse = memoryDB.updateParticipant(id, name, rawGiftIdeas);
@@ -134,7 +134,7 @@ public class ParticipantController {
         }
     }
 
-    @PostMapping("/updateParticipantNameById")
+    @PatchMapping("/updateParticipantNameById")
     public ResponseEntity<String> updateParticipantById(@RequestParam(value = "id") Long id, @RequestParam(value = "name") String name) {
         try {
             val dbResponse = memoryDB.updateParticipant(id, name);
@@ -152,7 +152,7 @@ public class ParticipantController {
         }
     }
 
-    @PostMapping("/updateParticipantGiftIdeasById")
+    @PatchMapping("/updateParticipantGiftIdeasById")
     public ResponseEntity<String> updateParticipantById(@RequestParam(value = "id") Long id, @RequestParam(value = "gift ideas") List<String> rawGiftIdeas) {
         try {
             val dbResponse = memoryDB.updateParticipant(id, rawGiftIdeas);
