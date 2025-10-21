@@ -10,6 +10,18 @@
                                                                             |_|   |_|
 ```
 
+## 0.1.0
+
+1. upgraded **commons** dependency from **2.0.0** to **3.0.0**
+2. upgraded **memoryDB** dependency from **1.0.1** to **1.1.0**
+3. changed mapping for _updateParticipantById_ to from **POST** to **PUT**, changed mappings for
+   _updateParticipantNameById_
+   _updateParticipantGiftIdeasById_ from **POST** to **PATCH**
+4. changed dependency injection in **GiftRandomizerController** and **ParticipantController** from _@Autowired_
+   annotation to constructor based
+5. added static modifier to UNKNOWN_ERROR constant in **ParticipantController**
+6. changed _getMemoryDB_ bean name to streamline with memoryDB module naming scheme
+
 ## 0.0.4
 
 1. changed to use new **memoryDB** module in place of commons **InMemoryDB**
