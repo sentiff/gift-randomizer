@@ -1,13 +1,13 @@
 package org.sentiff.gift.randomizer.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import lombok.AllArgsConstructor;
 import lombok.val;
 import org.sentiff.gift.randomizer.commons.Storage;
 import org.sentiff.gift.randomizer.commons.model.exceptions.ParticipantException;
 import org.sentiff.gift.randomizer.commons.utils.JsonUtils;
 import org.sentiff.gift.randomizer.utils.ContentType;
 import org.sentiff.gift.randomizer.utils.ResponseUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,15 +15,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@AllArgsConstructor
 public class ParticipantController {
 
-    @Autowired
     private JsonUtils jsonUtils;
-
-    @Autowired
     private ResponseUtils responseUtils;
-
-    @Autowired
     private Storage memoryDB;
 
 
