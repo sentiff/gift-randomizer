@@ -2,7 +2,7 @@ package org.sentiff.gift.randomizer;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
-import org.sentiff.gift.randomizer.commons.Storage;
+import org.sentiff.gift.randomizer.commons.storage.Storage;
 import org.sentiff.gift.randomizer.commons.model.GiftIdea;
 import org.sentiff.gift.randomizer.commons.model.Observation;
 import org.sentiff.gift.randomizer.commons.model.Participant;
@@ -24,7 +24,7 @@ public class BeanProvider {
         return new OpenAPI()
                 .info(new Info()
                         .title("gift randomizer API")
-                        .version("0.0.4"));
+                        .version("0.1.0"));
     }
 
     @Bean
