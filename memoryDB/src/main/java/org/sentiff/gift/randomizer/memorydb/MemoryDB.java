@@ -74,7 +74,7 @@ public class MemoryDB implements Storage {
             participants.add(updatedParticipant);
             return new Response("updated participant with id: %s".formatted(id), "200");
         } catch (ParticipantException e) {
-            return new Response("cannot remove, participant with id: %s not found".formatted(id), "204");
+            return new Response("cannot update, participant with id: %s not found".formatted(id), "204");
         }
     }
 
@@ -88,7 +88,7 @@ public class MemoryDB implements Storage {
             participants.add(updatedParticipant);
             return new Response("updated candidate with id: %s".formatted(id), "200");
         } catch (ParticipantException e) {
-            return new Response("cannot remove, participant with id: %s not found".formatted(id), "204");
+            return new Response("cannot update, participant with id: %s not found".formatted(id), "204");
         }
     }
 
@@ -102,7 +102,7 @@ public class MemoryDB implements Storage {
             participants.add(updatedParticipant);
             return new Response("updated participant with id: %s".formatted(id), "200");
         } catch (ParticipantException e) {
-            return new Response("cannot remove, participant with id: %s not found".formatted(id), "204");
+            return new Response("cannot update, participant with id: %s not found".formatted(id), "204");
         }
     }
 
