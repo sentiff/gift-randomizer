@@ -23,7 +23,7 @@ public class ParticipantController {
     private Storage memoryDB;
 
 
-    private final String UNKNOWN_ERROR = "UNKNOWN ERROR";
+    private static final String UNKNOWN_ERROR = "UNKNOWN ERROR";
 
 
     @GetMapping("/getParticipants")
