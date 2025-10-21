@@ -1,3 +1,5 @@
+package org.sentiff.gift.randomizer.commons;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
