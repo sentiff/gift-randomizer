@@ -1,25 +1,21 @@
 package org.sentiff.gift.randomizer.controllers;
 
+import lombok.AllArgsConstructor;
 import lombok.val;
-import org.sentiff.gift.randomizer.commons.Storage;
+import org.sentiff.gift.randomizer.commons.storage.Storage;
 import org.sentiff.gift.randomizer.commons.utils.JsonUtils;
 import org.sentiff.gift.randomizer.utils.ContentType;
 import org.sentiff.gift.randomizer.utils.ResponseUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@AllArgsConstructor
 public class GiftRandomizerController {
 
-    @Autowired
     private JsonUtils jsonUtils;
-
-    @Autowired
     private ResponseUtils responseUtils;
-
-    @Autowired
     private Storage memoryDB;
 
     @PostMapping("/createObservations")
