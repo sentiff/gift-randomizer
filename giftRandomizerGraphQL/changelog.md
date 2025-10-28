@@ -9,6 +9,11 @@
  |___/                                                                                |_|                      
 ```
 
+## 0.2.0
+
+1. upgraded **commons** dependency from **2.0.0** to **3.0.0**
+2. upgraded **memoryDB** dependency from **1.0.1** to **1.1.0**
+
 ## 0.1.0
 
 1. changed to use new **memoryDB** module in place of commons **InMemoryDB**
