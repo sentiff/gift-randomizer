@@ -18,9 +18,9 @@ public class GiftRandomizerController {
 
     private final Logger log = LoggerFactory.getLogger(GiftRandomizerController.class);
 
-    private JsonUtils jsonUtils;
-    private ResponseUtils responseUtils;
-    private Storage memoryDB;
+    private final JsonUtils jsonUtils;
+    private final ResponseUtils responseUtils;
+    private final Storage memoryDB;
 
     @PostMapping("/createObservations")
     public ResponseEntity<String> createObservations(@RequestParam(value = "fairnessEnabled") Boolean areObservationsFair) {
@@ -104,9 +104,9 @@ public class GiftRandomizerController {
         log.info("queried /getObservationById endpoint");
         log.debug("processing reqeust to get observation: {}", id);
         try {
-            val response = memoryDB.getObservation(id);
+            val observation = memoryDB.getObservation(id);
             return responseUtils.createResponse(
-                    jsonUtils.toJson(response),
+                    jsonUtils.toJson(observation),
                     ContentType.APPLICATION_JSON.value,
                     HttpStatus.OK
             );
@@ -124,9 +124,9 @@ public class GiftRandomizerController {
         log.info("queried /getObservationByName endpoint");
         log.debug("processing reqeust to get observation: {}", name);
         try {
-            val response = memoryDB.getObservation(name);
+            val observation = memoryDB.getObservation(name);
             return responseUtils.createResponse(
-                    jsonUtils.toJson(response),
+                    jsonUtils.toJson(observation),
                     ContentType.APPLICATION_JSON.value,
                     HttpStatus.OK
             );

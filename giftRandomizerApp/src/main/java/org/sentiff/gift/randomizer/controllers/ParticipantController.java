@@ -22,9 +22,9 @@ public class ParticipantController {
 
     private final Logger log = LoggerFactory.getLogger(ParticipantController.class);
 
-    private JsonUtils jsonUtils;
-    private ResponseUtils responseUtils;
-    private Storage memoryDB;
+    private final JsonUtils jsonUtils;
+    private final ResponseUtils responseUtils;
+    private final Storage memoryDB;
 
     private static final String UNKNOWN_ERROR = "UNKNOWN ERROR";
 
@@ -32,9 +32,9 @@ public class ParticipantController {
     public ResponseEntity<String> getParticipants() {
         log.info("queried /getParticipants endpoint");
         try {
-            val person = memoryDB.getParticipants();
+            val participants = memoryDB.getParticipants();
             return responseUtils.createResponse(
-                    jsonUtils.toJson(person),
+                    jsonUtils.toJson(participants),
                     ContentType.APPLICATION_JSON.value,
                     HttpStatus.OK
             );
@@ -58,9 +58,9 @@ public class ParticipantController {
         log.info("queried /getParticipantByName endpoint");
         log.debug("processing request to get participant: {}", name);
         try {
-            val person = memoryDB.getParticipant(name);
+            val participant = memoryDB.getParticipant(name);
             return responseUtils.createResponse(
-                    jsonUtils.toJson(person),
+                    jsonUtils.toJson(participant),
                     ContentType.APPLICATION_JSON.value,
                     HttpStatus.OK
             );
@@ -84,9 +84,9 @@ public class ParticipantController {
         log.info("queried /getParticipantById endpoint");
         log.debug("processing request to get participant: {}", id);
         try {
-            val person = memoryDB.getParticipant(id);
+            val participant = memoryDB.getParticipant(id);
             return responseUtils.createResponse(
-                    jsonUtils.toJson(person),
+                    jsonUtils.toJson(participant),
                     ContentType.APPLICATION_JSON.value,
                     HttpStatus.OK
             );
@@ -106,13 +106,13 @@ public class ParticipantController {
     }
 
     @PostMapping("/addParticipant")
-    public ResponseEntity<String> addParticipant(@RequestParam(value = "name") String name, @RequestParam(value = "giftIdeas") List<String> giftIdeas) {
+    public ResponseEntity<String> addParticipant(@RequestParam(value = "name") String name, @RequestParam(value = "giftIdeas") List<String> rawGiftIdeas) {
         log.info("queried /addParticipant endpoint");
-        log.debug("processing request to add participant with name: {} and giftIdeas: {}", name, giftIdeas);
+        log.debug("processing request to add participant with name: {} and rawGiftIdeas: {}", name, rawGiftIdeas);
         try {
-            val dbResponse = memoryDB.addParticipant(name, giftIdeas);
+            val response = memoryDB.addParticipant(name, rawGiftIdeas);
             return responseUtils.createResponse(
-                    jsonUtils.toJson(dbResponse),
+                    jsonUtils.toJson(response),
                     ContentType.APPLICATION_JSON.value,
                     HttpStatus.OK
             );
@@ -128,11 +128,11 @@ public class ParticipantController {
     @PutMapping("/updateParticipantById")
     public ResponseEntity<String> updateParticipantById(@RequestParam(value = "id") Long id, @RequestParam(value = "name") String name, @RequestParam(value = "gift ideas") List<String> rawGiftIdeas) {
         log.info("queried /updateParticipantById endpoint");
-        log.debug("processing request to update participant: {}, with name: {} and giftIdeas: {}", id, name, rawGiftIdeas);
+        log.debug("processing request to update participant: {}, with name: {} and rawGiftIdeas: {}", id, name, rawGiftIdeas);
         try {
-            val dbResponse = memoryDB.updateParticipant(id, name, rawGiftIdeas);
+            val response = memoryDB.updateParticipant(id, name, rawGiftIdeas);
             return responseUtils.createResponse(
-                    jsonUtils.toJson(dbResponse),
+                    jsonUtils.toJson(response),
                     ContentType.APPLICATION_JSON.value,
                     HttpStatus.OK
             );
@@ -150,9 +150,9 @@ public class ParticipantController {
         log.info("queried /updateParticipantNameById endpoint");
         log.debug("processing request to update participant: {}, with name: {}", id, name);
         try {
-            val dbResponse = memoryDB.updateParticipant(id, name);
+            val response = memoryDB.updateParticipant(id, name);
             return responseUtils.createResponse(
-                    jsonUtils.toJson(dbResponse),
+                    jsonUtils.toJson(response),
                     ContentType.APPLICATION_JSON.value,
                     HttpStatus.OK
             );
@@ -170,9 +170,9 @@ public class ParticipantController {
         log.info("queried /updateParticipantGiftIdeasById endpoint");
         log.debug("processing request to update participant: {}, with rawGiftIdeas: {}", id, rawGiftIdeas);
         try {
-            val dbResponse = memoryDB.updateParticipant(id, rawGiftIdeas);
+            val response = memoryDB.updateParticipant(id, rawGiftIdeas);
             return responseUtils.createResponse(
-                    jsonUtils.toJson(dbResponse),
+                    jsonUtils.toJson(response),
                     ContentType.APPLICATION_JSON.value,
                     HttpStatus.OK
             );
@@ -190,9 +190,9 @@ public class ParticipantController {
         log.info("queried /removeParticipantById endpoint");
         log.debug("processing request to remove participant: {}", id);
         try {
-            val dbResponse = memoryDB.removeParticipant(id);
+            val response = memoryDB.removeParticipant(id);
             return responseUtils.createResponse(
-                    jsonUtils.toJson(dbResponse),
+                    jsonUtils.toJson(response),
                     ContentType.APPLICATION_JSON.value,
                     HttpStatus.OK
             );
