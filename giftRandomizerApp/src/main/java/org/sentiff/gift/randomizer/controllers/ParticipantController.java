@@ -8,6 +8,8 @@ import org.sentiff.gift.randomizer.commons.storage.Storage;
 import org.sentiff.gift.randomizer.commons.utils.JsonUtils;
 import org.sentiff.gift.randomizer.utils.ContentType;
 import org.sentiff.gift.randomizer.utils.ResponseUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +20,8 @@ import java.util.List;
 @AllArgsConstructor
 public class ParticipantController {
 
+    private final Logger log = LoggerFactory.getLogger(ParticipantController.class);
+
     private JsonUtils jsonUtils;
     private ResponseUtils responseUtils;
     private Storage memoryDB;
@@ -26,6 +30,7 @@ public class ParticipantController {
 
     @GetMapping("/getParticipants")
     public ResponseEntity<String> getParticipants() {
+        log.info("queried /getParticipants endpoint");
         try {
             val person = memoryDB.getParticipants();
             return responseUtils.createResponse(
@@ -50,6 +55,8 @@ public class ParticipantController {
 
     @GetMapping("/getParticipantByName")
     public ResponseEntity<String> getParticipantByName(@RequestParam(value = "name") String name) {
+        log.info("queried /getParticipantByName endpoint");
+        log.debug("processing request to get participant: {}", name);
         try {
             val person = memoryDB.getParticipant(name);
             return responseUtils.createResponse(
@@ -74,6 +81,8 @@ public class ParticipantController {
 
     @GetMapping("/getParticipantById")
     public ResponseEntity<String> getParticipantById(@RequestParam(value = "id", defaultValue = "1") Long id) {
+        log.info("queried /getParticipantById endpoint");
+        log.debug("processing request to get participant: {}", id);
         try {
             val person = memoryDB.getParticipant(id);
             return responseUtils.createResponse(
@@ -98,6 +107,8 @@ public class ParticipantController {
 
     @PostMapping("/addParticipant")
     public ResponseEntity<String> addParticipant(@RequestParam(value = "name") String name, @RequestParam(value = "giftIdeas") List<String> giftIdeas) {
+        log.info("queried /addParticipant endpoint");
+        log.debug("processing request to add participant with name: {} and giftIdeas: {}", name, giftIdeas);
         try {
             val dbResponse = memoryDB.addParticipant(name, giftIdeas);
             return responseUtils.createResponse(
@@ -116,6 +127,8 @@ public class ParticipantController {
 
     @PutMapping("/updateParticipantById")
     public ResponseEntity<String> updateParticipantById(@RequestParam(value = "id") Long id, @RequestParam(value = "name") String name, @RequestParam(value = "gift ideas") List<String> rawGiftIdeas) {
+        log.info("queried /updateParticipantById endpoint");
+        log.debug("processing request to update participant: {}, with name: {} and giftIdeas: {}", id, name, rawGiftIdeas);
         try {
             val dbResponse = memoryDB.updateParticipant(id, name, rawGiftIdeas);
             return responseUtils.createResponse(
@@ -134,6 +147,8 @@ public class ParticipantController {
 
     @PatchMapping("/updateParticipantNameById")
     public ResponseEntity<String> updateParticipantById(@RequestParam(value = "id") Long id, @RequestParam(value = "name") String name) {
+        log.info("queried /updateParticipantNameById endpoint");
+        log.debug("processing request to update participant: {}, with name: {}", id, name);
         try {
             val dbResponse = memoryDB.updateParticipant(id, name);
             return responseUtils.createResponse(
@@ -152,6 +167,8 @@ public class ParticipantController {
 
     @PatchMapping("/updateParticipantGiftIdeasById")
     public ResponseEntity<String> updateParticipantById(@RequestParam(value = "id") Long id, @RequestParam(value = "gift ideas") List<String> rawGiftIdeas) {
+        log.info("queried /updateParticipantGiftIdeasById endpoint");
+        log.debug("processing request to update participant: {}, with rawGiftIdeas: {}", id, rawGiftIdeas);
         try {
             val dbResponse = memoryDB.updateParticipant(id, rawGiftIdeas);
             return responseUtils.createResponse(
@@ -170,6 +187,8 @@ public class ParticipantController {
 
     @DeleteMapping("/removeParticipantById")
     public ResponseEntity<String> removeParticipantById(@RequestParam(value = "id") Long id) {
+        log.info("queried /removeParticipantById endpoint");
+        log.debug("processing request to remove participant: {}", id);
         try {
             val dbResponse = memoryDB.removeParticipant(id);
             return responseUtils.createResponse(
