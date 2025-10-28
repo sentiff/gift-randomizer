@@ -10,6 +10,13 @@
                                                                             |_|   |_|
 ```
 
+## 0.1.1
+
+1. added basic logging to all controllers
+2. changed variable names from _dbResponse_ to _response_ and _response_ to _participant/observation_ in
+   **GiftRandomizerController** and **ParticipantController**
+3. added _final_ modifier to dependencies in **GiftRandomizerController** and **ParticipantController**
+
 ## 0.1.0
 
 1. upgraded **commons** dependency from **2.0.0** to **3.0.0**
