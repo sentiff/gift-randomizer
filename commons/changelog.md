@@ -5,6 +5,10 @@
  \___\___/|_| |_| |_|_| |_| |_|\___/|_| |_|___/
 ```
 
+## 3.0.1
+1. updated spring dependencies from **3.1.5** to **3.5.7** and lombok from **1.18.30** to **1.18.42**
+2. moved spring dependencies version to properties
+
 ## 3.0.0
 
 1. reworked **Storage** into extending **ParticipantRepository** and **ObservationRepository** which contains methods
