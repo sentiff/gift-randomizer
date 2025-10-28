@@ -1,29 +1,31 @@
 package org.sentiff.gift.randomizer.controllers;
 
+import lombok.AllArgsConstructor;
 import lombok.val;
-import org.sentiff.gift.randomizer.commons.Storage;
+import org.sentiff.gift.randomizer.commons.storage.Storage;
 import org.sentiff.gift.randomizer.commons.utils.JsonUtils;
 import org.sentiff.gift.randomizer.utils.ContentType;
 import org.sentiff.gift.randomizer.utils.ResponseUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@AllArgsConstructor
 public class GiftRandomizerController {
 
-    @Autowired
-    private JsonUtils jsonUtils;
+    private final Logger log = LoggerFactory.getLogger(GiftRandomizerController.class);
 
-    @Autowired
-    private ResponseUtils responseUtils;
-
-    @Autowired
-    private Storage memoryDB;
+    private final JsonUtils jsonUtils;
+    private final ResponseUtils responseUtils;
+    private final Storage memoryDB;
 
     @PostMapping("/createObservations")
     public ResponseEntity<String> createObservations(@RequestParam(value = "fairnessEnabled") Boolean areObservationsFair) {
+        log.info("queried /createObservations endpoint");
+        log.debug("processing request to create observations with fairness set to: {}", areObservationsFair);
         try {
             val response = memoryDB.createObservations(false);
             return responseUtils.createResponse(
@@ -42,6 +44,7 @@ public class GiftRandomizerController {
 
     @PostMapping("/recreateObservations")
     public ResponseEntity<String> recreateObservations() {
+        log.info("queried /recreateObservations endpoint");
         try {
             val response = memoryDB.createObservations(true);
             return responseUtils.createResponse(
@@ -60,6 +63,7 @@ public class GiftRandomizerController {
 
     @GetMapping("/getObservations")
     public ResponseEntity<String> getObservations() {
+        log.info("queried /getObservations endpoint");
         try {
             val observations = memoryDB.getObservations();
             return responseUtils.createResponse(
@@ -78,6 +82,7 @@ public class GiftRandomizerController {
 
     @DeleteMapping("/removeObservations")
     public ResponseEntity<String> removeObservations() {
+        log.info("queried /removeObservations endpoint");
         try {
             val response = memoryDB.removeObservations();
             return responseUtils.createResponse(
@@ -96,10 +101,12 @@ public class GiftRandomizerController {
 
     @GetMapping("/getObservationById")
     public ResponseEntity<String> getObservationById(@RequestParam(value = "id", defaultValue = "1") Long id) {
+        log.info("queried /getObservationById endpoint");
+        log.debug("processing reqeust to get observation: {}", id);
         try {
-            val response = memoryDB.getObservation(id);
+            val observation = memoryDB.getObservation(id);
             return responseUtils.createResponse(
-                    jsonUtils.toJson(response),
+                    jsonUtils.toJson(observation),
                     ContentType.APPLICATION_JSON.value,
                     HttpStatus.OK
             );
@@ -114,10 +121,12 @@ public class GiftRandomizerController {
 
     @GetMapping("/getObservationByName")
     public ResponseEntity<String> getObservationByName(@RequestParam(value = "Name") String name) {
+        log.info("queried /getObservationByName endpoint");
+        log.debug("processing reqeust to get observation: {}", name);
         try {
-            val response = memoryDB.getObservation(name);
+            val observation = memoryDB.getObservation(name);
             return responseUtils.createResponse(
-                    jsonUtils.toJson(response),
+                    jsonUtils.toJson(observation),
                     ContentType.APPLICATION_JSON.value,
                     HttpStatus.OK
             );

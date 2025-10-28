@@ -9,6 +9,18 @@
  |___/                                                                                |_|                      
 ```
 
+## 0.2.1
+
+1. upgraded **commons** dependency from **3.0.0** to **3.0.1**
+2. upgraded **memoryDB** dependency from **1.1.0** to **1.1.1**
+3. upgraded spring dependencies from **3.1.5** to **3.5.7** and lombok from **1.18.30** to **1.18.42**
+4. moved spring dependencies version to properties
+
+## 0.2.0
+
+1. upgraded **commons** dependency from **2.0.0** to **3.0.0**
+2. upgraded **memoryDB** dependency from **1.0.1** to **1.1.0**
+
 ## 0.1.0
 
 1. changed to use new **memoryDB** module in place of commons **InMemoryDB**

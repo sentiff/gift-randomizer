@@ -5,6 +5,20 @@
  \___\___/|_| |_| |_|_| |_| |_|\___/|_| |_|___/
 ```
 
+## 3.0.1
+
+1. updated spring dependencies from **3.1.5** to **3.5.7** and lombok from **1.18.30** to **1.18.42**
+2. moved spring dependencies version to properties
+
+## 3.0.0
+
+1. reworked **Storage** into extending **ParticipantRepository** and **ObservationRepository** which contains methods
+   declared previously in **Storage**
+2. added interface default method _describe_ to that returns name of the interface and it's extensions
+3. added tests to check **Storage**, **ParticipantRepository** and **ObservationRepository** default methods
+4. moved **JsonUtilsTest** to utils package
+5. moved interfaces to storage package
+
 ## 2.0.0
 
 1. moved **inMemoryDB** and **inMemoryDBTest** to separate module

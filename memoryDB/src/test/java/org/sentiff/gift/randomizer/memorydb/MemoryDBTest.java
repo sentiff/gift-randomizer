@@ -1,10 +1,11 @@
+package org.sentiff.gift.randomizer.memorydb;
+
 import lombok.val;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.sentiff.gift.randomizer.commons.model.*;
 import org.sentiff.gift.randomizer.commons.model.exceptions.ObservationsException;
 import org.sentiff.gift.randomizer.commons.model.exceptions.ParticipantException;
-import org.sentiff.gift.randomizer.memorydb.MemoryDB;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -47,7 +48,7 @@ class MemoryDBTest {
         return observations;
     }
 
-    private MemoryDB createInMemoryDB(Boolean areParticipants, Boolean areObservations) {
+    private MemoryDB createMemoryDB(Boolean areParticipants, Boolean areObservations) {
         var participants = new LinkedList<Participant>();
         var observations = new LinkedList<Observation>();
         val randomGenerator = new Random();
@@ -64,7 +65,7 @@ class MemoryDBTest {
 
     @Test
     void getParticipantTest() throws ParticipantException {
-        val tempDB = createInMemoryDB(true, false);
+        val tempDB = createMemoryDB(true, false);
 
         val expectedParticipant = JANUSZ;
 
@@ -88,13 +89,13 @@ class MemoryDBTest {
 
     @Test
     void addParticipantTest() {
-        var tempDB = createInMemoryDB(true, false);
+        var tempDB = createMemoryDB(true, false);
         var actualResponse = tempDB.addParticipant("Mati", List.of("laptok"));
         var expectedResponse = new Response("added participant with id: 4", "200");
         assertEquals(expectedResponse.body(), actualResponse.body());
         assertEquals(expectedResponse.code(), actualResponse.code());
 
-        tempDB = createInMemoryDB(false, true);
+        tempDB = createMemoryDB(false, true);
         actualResponse = tempDB.addParticipant("Mati", List.of("laptok"));
         expectedResponse = new Response("added participant with id: 1", "200");
         assertEquals(expectedResponse.body(), actualResponse.body());
@@ -102,13 +103,13 @@ class MemoryDBTest {
 
     @Test
     void updateParticipantTest() throws ParticipantException {
-        var tempDB = createInMemoryDB(true, false);
+        var tempDB = createMemoryDB(true, false);
 
         val expectedResponse = new Response("updated participant with id: 1", "204");
         var actualResponse = tempDB.updateParticipant(1L, "Andrzej");
         assertEquals(expectedResponse.body(), actualResponse.body());
 
-        tempDB = createInMemoryDB(true, false);
+        tempDB = createMemoryDB(true, false);
 
         tempDB.updateParticipant(1L, "Andrzej", List.of("laptok"));
 
@@ -135,7 +136,7 @@ class MemoryDBTest {
 
     @Test
     void getObservationsTest() throws ObservationsException {
-        var tempDB = createInMemoryDB(true, true);
+        var tempDB = createMemoryDB(true, true);
 
         val actualObservations = tempDB.getObservations();
         Assertions.assertEquals(OBSERVATIONS, actualObservations);
@@ -152,13 +153,13 @@ class MemoryDBTest {
 
     @Test
     void removeObservationsTest() throws ObservationsException {
-        var tempDB = createInMemoryDB(true, true);
+        var tempDB = createMemoryDB(true, true);
 
         var expectedResponse = new Response("observations removed", "200");
         val actualResponse = tempDB.removeObservations();
         assertEquals(expectedResponse, actualResponse);
 
-        tempDB = createInMemoryDB(true, false);
+        tempDB = createMemoryDB(true, false);
 
         var expectedException = new ObservationsException("no observations to remove");
         var actualException = Assertions.assertThrows(ObservationsException.class, tempDB::removeObservations);
@@ -167,7 +168,7 @@ class MemoryDBTest {
 
     @Test
     void createObservationsTest() throws ObservationsException {
-        var tempDB = createInMemoryDB(true, false);
+        var tempDB = createMemoryDB(true, false);
 
         var expectedResponse = new Response("3 observations created", "200");
         var actualResponse = tempDB.createObservations(false);
