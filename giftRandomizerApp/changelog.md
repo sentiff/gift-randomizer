@@ -10,6 +10,13 @@
                                                                             |_|   |_|
 ```
 
+## 0.1.2
+
+1. upgraded **commons** dependency from **3.0.0** to **3.0.1**
+2. upgraded **memoryDB** dependency from **1.1.0** to **1.1.1**
+3. upgraded spring dependencies from **3.1.5** to **3.5.7**
+4. moved spring dependencies version to properties
+
 ## 0.1.1
 
 1. added basic logging to all controllers
