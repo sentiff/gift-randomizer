@@ -3,7 +3,7 @@ package org.sentiff.gift.randomizer.memorydb;
 import lombok.AllArgsConstructor;
 import lombok.val;
 import org.javatuples.Pair;
-import org.sentiff.gift.randomizer.commons.Storage;
+import org.sentiff.gift.randomizer.commons.storage.Storage;
 import org.sentiff.gift.randomizer.commons.model.Observation;
 import org.sentiff.gift.randomizer.commons.model.GiftIdea;
 import org.sentiff.gift.randomizer.commons.model.Participant;
@@ -74,7 +74,7 @@ public class MemoryDB implements Storage {
             participants.add(updatedParticipant);
             return new Response("updated participant with id: %s".formatted(id), "200");
         } catch (ParticipantException e) {
-            return new Response("cannot remove, participant with id: %s not found".formatted(id), "204");
+            return new Response("cannot update, participant with id: %s not found".formatted(id), "204");
         }
     }
 
@@ -88,7 +88,7 @@ public class MemoryDB implements Storage {
             participants.add(updatedParticipant);
             return new Response("updated candidate with id: %s".formatted(id), "200");
         } catch (ParticipantException e) {
-            return new Response("cannot remove, participant with id: %s not found".formatted(id), "204");
+            return new Response("cannot update, participant with id: %s not found".formatted(id), "204");
         }
     }
 
@@ -102,7 +102,7 @@ public class MemoryDB implements Storage {
             participants.add(updatedParticipant);
             return new Response("updated participant with id: %s".formatted(id), "200");
         } catch (ParticipantException e) {
-            return new Response("cannot remove, participant with id: %s not found".formatted(id), "204");
+            return new Response("cannot update, participant with id: %s not found".formatted(id), "204");
         }
     }
 
