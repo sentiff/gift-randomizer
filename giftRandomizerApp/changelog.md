@@ -16,6 +16,7 @@
 2. changed variable names from _dbResponse_ to _response_ and _response_ to _participant/observation_ in
    **GiftRandomizerController** and **ParticipantController**
 3. added _final_ modifier to dependencies in **GiftRandomizerController** and **ParticipantController**
+4. added _application-{env}.properties_ to the resource dir with default profile set to _dev_
 
 ## 0.1.0
 
