@@ -8,11 +8,18 @@
                                       __/ |            
                                      |___/                              
 ```
+
+## 1.1.1
+
+1. upgraded commons dependency from **3.0.0** to **3.0.1**
+2. updated spring dependencies from **3.1.5** to **3.5.7**
+3. moved spring dependencies version to properties
+
 ## 1.1.0
 
 1. upgraded commons dependency from **2.0.0** to **3.0.0**
 2. fixed import paths for **Storage** interface
-3. fixed error messages in _updateParticipant_ methods that implied deletion 
+3. fixed error messages in _updateParticipant_ methods that implied deletion
 
 ## 1.0.1
 
